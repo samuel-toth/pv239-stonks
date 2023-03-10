@@ -13,6 +13,13 @@
 		391487F929BB4D1E0069C6B5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 391487F829BB4D1E0069C6B5 /* Preview Assets.xcassets */; };
 		391487FB29BB4D1E0069C6B5 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391487FA29BB4D1E0069C6B5 /* Persistence.swift */; };
 		391487FE29BB4D1E0069C6B5 /* Stonks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 391487FC29BB4D1E0069C6B5 /* Stonks.xcdatamodeld */; };
+		3914880929BB4DC20069C6B5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914880829BB4DC20069C6B5 /* HomeView.swift */; };
+		3914880B29BB4DD40069C6B5 /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914880A29BB4DD40069C6B5 /* PortfolioView.swift */; };
+		3914880D29BB4DDE0069C6B5 /* PortfolioAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914880C29BB4DDE0069C6B5 /* PortfolioAddView.swift */; };
+		3914880F29BB4DEA0069C6B5 /* PortfolioDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914880E29BB4DEA0069C6B5 /* PortfolioDetailView.swift */; };
+		3914881129BB4DF70069C6B5 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914881029BB4DF70069C6B5 /* SearchView.swift */; };
+		3914881329BB4E000069C6B5 /* SearchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914881229BB4E000069C6B5 /* SearchDetailView.swift */; };
+		3914881529BB56650069C6B5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914881429BB56650069C6B5 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +30,13 @@
 		391487F829BB4D1E0069C6B5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		391487FA29BB4D1E0069C6B5 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		391487FD29BB4D1E0069C6B5 /* Stonks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Stonks.xcdatamodel; sourceTree = "<group>"; };
+		3914880829BB4DC20069C6B5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		3914880A29BB4DD40069C6B5 /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
+		3914880C29BB4DDE0069C6B5 /* PortfolioAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioAddView.swift; sourceTree = "<group>"; };
+		3914880E29BB4DEA0069C6B5 /* PortfolioDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDetailView.swift; sourceTree = "<group>"; };
+		3914881029BB4DF70069C6B5 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		3914881229BB4E000069C6B5 /* SearchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailView.swift; sourceTree = "<group>"; };
+		3914881429BB56650069C6B5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +69,8 @@
 		391487F029BB4D1E0069C6B5 /* Stonks */ = {
 			isa = PBXGroup;
 			children = (
+				3914880429BB4D400069C6B5 /* View */,
 				391487F129BB4D1E0069C6B5 /* StonksApp.swift */,
-				391487F329BB4D1E0069C6B5 /* ContentView.swift */,
 				391487F529BB4D1E0069C6B5 /* Assets.xcassets */,
 				391487FA29BB4D1E0069C6B5 /* Persistence.swift */,
 				391487FC29BB4D1E0069C6B5 /* Stonks.xcdatamodeld */,
@@ -71,6 +85,45 @@
 				391487F829BB4D1E0069C6B5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3914880429BB4D400069C6B5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3914880729BB4DB70069C6B5 /* Home */,
+				3914880629BB4DB00069C6B5 /* Search */,
+				3914880529BB4DAA0069C6B5 /* Portfolio */,
+				391487F329BB4D1E0069C6B5 /* ContentView.swift */,
+				3914881429BB56650069C6B5 /* SettingsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3914880529BB4DAA0069C6B5 /* Portfolio */ = {
+			isa = PBXGroup;
+			children = (
+				3914880A29BB4DD40069C6B5 /* PortfolioView.swift */,
+				3914880C29BB4DDE0069C6B5 /* PortfolioAddView.swift */,
+				3914880E29BB4DEA0069C6B5 /* PortfolioDetailView.swift */,
+			);
+			path = Portfolio;
+			sourceTree = "<group>";
+		};
+		3914880629BB4DB00069C6B5 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				3914881029BB4DF70069C6B5 /* SearchView.swift */,
+				3914881229BB4E000069C6B5 /* SearchDetailView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		3914880729BB4DB70069C6B5 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3914880829BB4DC20069C6B5 /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,10 +196,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3914880F29BB4DEA0069C6B5 /* PortfolioDetailView.swift in Sources */,
+				3914881129BB4DF70069C6B5 /* SearchView.swift in Sources */,
 				391487FB29BB4D1E0069C6B5 /* Persistence.swift in Sources */,
+				3914880D29BB4DDE0069C6B5 /* PortfolioAddView.swift in Sources */,
+				3914880B29BB4DD40069C6B5 /* PortfolioView.swift in Sources */,
 				391487FE29BB4D1E0069C6B5 /* Stonks.xcdatamodeld in Sources */,
 				391487F429BB4D1E0069C6B5 /* ContentView.swift in Sources */,
+				3914880929BB4DC20069C6B5 /* HomeView.swift in Sources */,
 				391487F229BB4D1E0069C6B5 /* StonksApp.swift in Sources */,
+				3914881329BB4E000069C6B5 /* SearchDetailView.swift in Sources */,
+				3914881529BB56650069C6B5 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
