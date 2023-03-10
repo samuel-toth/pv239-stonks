@@ -13,6 +13,11 @@
 		39058F4C29AF816100F3D840 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39058F4A29AF816100F3D840 /* Main.storyboard */; };
 		39058F4E29AF816100F3D840 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39058F4D29AF816100F3D840 /* Assets.xcassets */; };
 		39058F5129AF816100F3D840 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39058F4F29AF816100F3D840 /* LaunchScreen.storyboard */; };
+		391487B129BB45030069C6B5 /* CoinAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391487B029BB45030069C6B5 /* CoinAsset.swift */; };
+		391487B729BB45F50069C6B5 /* CoinHistoryRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391487B629BB45F50069C6B5 /* CoinHistoryRecord.swift */; };
+		391487BA29BB47A60069C6B5 /* Stonks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 391487B829BB47A60069C6B5 /* Stonks.xcdatamodeld */; };
+		391487BF29BB4AA90069C6B5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391487BE29BB4AA90069C6B5 /* ContentView.swift */; };
+		391487C129BB4AD80069C6B5 /* StonksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391487C029BB4AD80069C6B5 /* StonksApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		39058F4D29AF816100F3D840 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39058F5029AF816100F3D840 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39058F5229AF816100F3D840 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		391487B029BB45030069C6B5 /* CoinAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAsset.swift; sourceTree = "<group>"; };
+		391487B629BB45F50069C6B5 /* CoinHistoryRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinHistoryRecord.swift; sourceTree = "<group>"; };
+		391487B929BB47A60069C6B5 /* Stonks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Stonks.xcdatamodel; sourceTree = "<group>"; };
+		391487BE29BB4AA90069C6B5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		391487C029BB4AD80069C6B5 /* StonksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StonksApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +66,12 @@
 		39058F4329AF816100F3D840 /* Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				391487BD29BB4A280069C6B5 /* Repository */,
+				391487BC29BB4A240069C6B5 /* View */,
+				391487AF29BB44DE0069C6B5 /* Model */,
 				39058F4429AF816100F3D840 /* AppDelegate.swift */,
+				391487C029BB4AD80069C6B5 /* StonksApp.swift */,
+				391487B829BB47A60069C6B5 /* Stonks.xcdatamodeld */,
 				39058F4629AF816100F3D840 /* SceneDelegate.swift */,
 				39058F4829AF816100F3D840 /* ViewController.swift */,
 				39058F4A29AF816100F3D840 /* Main.storyboard */,
@@ -65,6 +80,30 @@
 				39058F5229AF816100F3D840 /* Info.plist */,
 			);
 			path = Tracker;
+			sourceTree = "<group>";
+		};
+		391487AF29BB44DE0069C6B5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				391487B029BB45030069C6B5 /* CoinAsset.swift */,
+				391487B629BB45F50069C6B5 /* CoinHistoryRecord.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		391487BC29BB4A240069C6B5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				391487BE29BB4AA90069C6B5 /* ContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		391487BD29BB4A280069C6B5 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +178,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				39058F4929AF816100F3D840 /* ViewController.swift in Sources */,
+				391487B729BB45F50069C6B5 /* CoinHistoryRecord.swift in Sources */,
+				391487BF29BB4AA90069C6B5 /* ContentView.swift in Sources */,
 				39058F4529AF816100F3D840 /* AppDelegate.swift in Sources */,
 				39058F4729AF816100F3D840 /* SceneDelegate.swift in Sources */,
+				391487C129BB4AD80069C6B5 /* StonksApp.swift in Sources */,
+				391487BA29BB47A60069C6B5 /* Stonks.xcdatamodeld in Sources */,
+				391487B129BB45030069C6B5 /* CoinAsset.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +402,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		391487B829BB47A60069C6B5 /* Stonks.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				391487B929BB47A60069C6B5 /* Stonks.xcdatamodel */,
+			);
+			currentVersion = 391487B929BB47A60069C6B5 /* Stonks.xcdatamodel */;
+			path = Stonks.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 39058F3929AF816100F3D840 /* Project object */;
 }
