@@ -31,10 +31,10 @@ struct SearchAssetRowView: View {
             
             
             VStack (alignment: HorizontalAlignment.leading) {
-                Text(asset.name )
+                Text(asset.name)
                     .font(Font.system(.title2, design: .default))
-                    .lineLimit(1)
-                Text(asset.symbol )
+                    .lineLimit(2)
+                Text(asset.symbol)
                     .font(Font.system(.subheadline))
                     .lineLimit(1)
                     .textCase(.uppercase)
@@ -44,11 +44,9 @@ struct SearchAssetRowView: View {
             Spacer()
             
             HStack {
-                Text("\(asset.current_price, specifier: "%.2f")")
-                Image(systemName: "person")
-                    .font(.title2)
-                    .symbolRenderingMode(.palette)
-                    .foregroundStyle(Color.accentColor, Color(UIColor.secondaryLabel))
+                Text(asset.current_price.formatted(.currency(code: "EUR")))
+                    .font(.title3)
+           
             }
         }
     }

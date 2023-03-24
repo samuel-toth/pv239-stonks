@@ -28,12 +28,23 @@ struct SearchView: View {
             .onSubmit {
                 // filter here
             }
+            .onChange(of: searchText) { value in
+                // if value is at least 3 characters long, then filter
+                if value.count >= 3 {
+                    print(searchText)
+                }
+                fetchMostActiveAssets()
+            }
             .navigationTitle("Search")
         }
         .onAppear {
-            CoinGeckoManager.loadCoinGeckoAssets { assets in
-                self.assets = assets
-            }
+            fetchMostActiveAssets()
+        }
+    }
+    
+    func fetchMostActiveAssets() {
+        CoinGeckoManager.loadCoinGeckoAssets { assets in
+            self.assets = assets
         }
     }
 }

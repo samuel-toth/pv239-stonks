@@ -24,7 +24,6 @@ struct SearchDetailView: View {
                             x: .value("Date", item.date),
                             y: .value("Price", item.price)
                     )
-
                 }
             }
             .frame(height: 300)
@@ -77,15 +76,16 @@ struct SearchDetailView: View {
                 }
                 HStack {
                     Spacer()
-                    Text("\(asset.current_price, specifier: "%.2f")")
+                    Text(asset.current_price.formatted(.currency(code: "EUR")))
                         .font(.title)
                         .foregroundColor(.accentColor)
                         .padding(.horizontal, 30)
                 }
                 HStack {
                     Spacer()
-                    Text("\(asset.price_change_percentage_24h ?? 0)")
+                    Text("\(asset.price_change_percentage_24h!, specifier: "%.2f")% 24h")
                         .padding(.horizontal, 30)
+                        .foregroundColor(asset.price_change_percentage_24h! < 0 ? Color.red : Color.green)
                 }
                 
                 HStack {
@@ -98,61 +98,59 @@ struct SearchDetailView: View {
                 }
                 
                 HStack {
-                    Image(systemName: "star")
+                    Image(systemName: "globe.europe.africa")
+                        .font(.title)
                     Text("Market capital rank")
                     Spacer()
                     Text("\(asset.market_cap_rank)")
-                    
+                        .font(.title2)
                 }
                 .padding(.horizontal, 40)
                 .padding(.vertical, 5)
-                
                 HStack {
-                    Image(systemName: "star")
+                    Image(systemName: "banknote")
+                        .font(.title)
                     Text("Market capital")
                     Spacer()
-                    Text("\(asset.market_cap)")
-                    
+                    Text(asset.market_cap.formatted(.currency(code: "EUR")))
+                        .font(.title2)
                 }
                 .padding(.horizontal, 40)
                 .padding(.vertical, 5)
-                
                 HStack {
-                    Image(systemName: "star")
+                    Image(systemName: "arrow.2.squarepath")
+                        .font(.title)
                     Text("Circulating supply")
                     Spacer()
-                    Text("\(asset.current_price)")
-                    
+                    Text("\(asset.current_price, specifier: "%.f")")                        .font(.title2)
                 }
                 .padding(.horizontal, 40)
                 .padding(.vertical, 5)
-                
                 HStack {
                     Image(systemName: "star")
+                        .font(.title2)
                     Text("Max supply")
                     Spacer()
-                    Text("\(asset.max_supply ?? 0)")
-                    
+                    Text("\(asset.max_supply ?? 0, specifier: "%.f")")                        .font(.title2)
                 }
                 .padding(.horizontal, 40)
                 .padding(.vertical, 5)
-                
                 HStack {
-                    Image(systemName: "star")
+                    Image(systemName: "arrow.up.forward")
+                        .font(.title)
                     Text("All time high")
                     Spacer()
-                    Text("\(asset.ath ?? 0)")
-                    
+                    Text((asset.ath ?? 0).formatted(.currency(code: "EUR")))            .font(.title2)
                 }
                 .padding(.horizontal, 40)
                 .padding(.vertical, 5)
-                
                 HStack {
-                    Image(systemName: "star")
+                    Image(systemName: "arrow.down.backward")
+                        .font(.title)
                     Text("All time low")
                     Spacer()
-                    Text("\(asset.atl ?? 0)")
-                    
+                    Text((asset.atl ?? 0).formatted(.currency(code: "EUR")))
+                        .font(.title2)
                 }
                 .padding(.horizontal, 40)
                 .padding(.vertical, 5)
