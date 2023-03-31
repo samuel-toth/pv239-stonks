@@ -18,6 +18,14 @@ struct SearchAssetRowView: View {
     
     var body: some View {
         HStack {
+            HStack {
+                Text("#" + asset.market_cap_rank.formatted())
+                    .font(.system(size: 14))
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: false)
+            }
+            .frame(width: 30, alignment: .leading)
+            
             AsyncImage(
                 url: URL(string:asset.image),
                 content: { image in
@@ -25,14 +33,17 @@ struct SearchAssetRowView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: 40, maxHeight: 40)
             },
-            placeholder: {
-                ProgressView()
+                placeholder: {
+                    ZStack {
+                        Rectangle()
+                            .frame(width: 40, height: 40)
+                        ProgressView()
+                    }
             })
-            
             
             VStack (alignment: HorizontalAlignment.leading) {
                 Text(asset.name)
-                    .font(Font.system(.title2, design: .default))
+                    .font(Font.system(.headline, design: .default))
                     .lineLimit(2)
                 Text(asset.symbol)
                     .font(Font.system(.subheadline))
@@ -45,7 +56,7 @@ struct SearchAssetRowView: View {
             
             HStack {
                 Text(asset.current_price.formatted(.currency(code: "USD")))
-                    .font(.title3)
+                    .font(.subheadline)
            
             }
         }
