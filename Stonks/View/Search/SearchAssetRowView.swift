@@ -44,7 +44,7 @@ struct SearchAssetRowView: View {
             Spacer()
             
             HStack {
-                Text(asset.current_price.formatted(.currency(code: "EUR")))
+                Text(asset.current_price.formatted(.currency(code: "USD")))
                     .font(.title3)
            
             }

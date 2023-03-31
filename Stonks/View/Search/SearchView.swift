@@ -11,11 +11,12 @@ struct SearchView: View {
     
     @State var searchText: String = ""
     @State var assets: [CoinGeckoAsset] = []
+    @State private var filteredAssets: [CoinGeckoAsset] = []
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(assets) { asset in
+                ForEach(filteredAssets) { asset in
                     NavigationLink(value: asset) {
                         SearchAssetRowView(asset: asset)
                     }
@@ -29,11 +30,11 @@ struct SearchView: View {
                 // filter here
             }
             .onChange(of: searchText) { value in
-                // if value is at least 3 characters long, then filter
-                if value.count >= 3 {
-                    print(searchText)
+                if value.count >= 1 {
+                    filterAssets()
+                } else {
+                    filteredAssets = assets
                 }
-                fetchMostActiveAssets()
             }
             .navigationTitle("Search")
         }
@@ -45,6 +46,13 @@ struct SearchView: View {
     func fetchMostActiveAssets() {
         CoinGeckoManager.loadCoinGeckoAssets { assets in
             self.assets = assets
+            self.filteredAssets = assets
+        }
+    }
+    
+    func filterAssets() {
+        filteredAssets = assets.filter { asset in
+            asset.name.lowercased().contains(searchText.lowercased()) || asset.symbol.lowercased().contains(searchText.lowercased())
         }
     }
 }
