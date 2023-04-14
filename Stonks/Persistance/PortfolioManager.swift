@@ -14,11 +14,62 @@ class PortfolioManager {
     
     private var viewContext = PersistenceController.shared.container.viewContext
     
-    func addAsset(){
+    func addAsset(name: String, symbol: String, coinGeckoId: String, amount: Float, imageUrl: String?, latestPrice: Float?) {
+        let newAsset = PortfolioAsset(context: viewContext)
+        newAsset.id = UUID()
+        newAsset.name = name
+        newAsset.symbol = symbol
+        newAsset.coinGeckoId = coinGeckoId
+        newAsset.amount = amount
+        
+        let newHistoryRecord = PortfolioAssetHistoryRecord(context: viewContext)
+        newHistoryRecord.id = UUID()
+        newHistoryRecord.createdAt = Date()
+        newHistoryRecord.value = amount
+        newHistoryRecord.asset = newAsset
+        
+        if imageUrl != nil {
+            newAsset.imageUrl = imageUrl!
+        }
+        
+        if latestPrice != nil {
+            newAsset.latestPrice = latestPrice!
+        }
+        
         save()
     }
+    
+    func updateAssetPrice(asset: PortfolioAsset, price: Float) {
+        asset.latestPrice = price
+        save()
+    }
+    
+    func updateAssetAmount(asset: PortfolioAsset, value: Float) {
+        asset.amount += value
+        
+        let newHistoryRecord = PortfolioAssetHistoryRecord(context: viewContext)
+        newHistoryRecord.id = UUID()
+        newHistoryRecord.createdAt = Date()
+        newHistoryRecord.value = value
+        newHistoryRecord.asset = asset
+        save()
+    }
+    
+    func getAssetHistoryRecords(id: UUID) -> [PortfolioAssetHistoryRecord] {
+        
+        let request: NSFetchRequest<PortfolioAssetHistoryRecord> = PortfolioAssetHistoryRecord.fetchRequest()
+        request.predicate = NSPredicate(format: "asset.id == %@", id as CVarArg)
 
-    func deleteAsset(asset: PortfolioAsset){
+        do {
+            let result = try viewContext.fetch(request)
+            return result
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+
+    func deleteAsset(asset: PortfolioAsset) {
         viewContext.delete(asset)
         save()
     }
@@ -39,6 +90,24 @@ class PortfolioManager {
     private func save() {
         do {
             try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
+    func createTestData() -> PortfolioAsset {
+        let newAsset = PortfolioAsset(context: viewContext)
+        newAsset.id = UUID(uuidString: "E621E1F8-C36C-495A-93FC-0C247A3E6E5F")!
+        newAsset.name = "Test Counter"
+        newAsset.amount = 0
+        newAsset.symbol = "BTC"
+        newAsset.imageUrl = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
+
+
+        do {
+            try viewContext.save()
+            return newAsset
         } catch {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
