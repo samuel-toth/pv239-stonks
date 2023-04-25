@@ -15,7 +15,7 @@ struct PortfolioDetailView: View {
     
     @ObservedObject var asset: PortfolioAsset
     
-    @State private var valueToAdd: Float = 1
+    @State private var valueToAdd: Double = 1
     @State private var showIncreaseAlert = false
     @State private var showDecreaseAlert = false
     @State private var isHistoryExpanded: Bool = false

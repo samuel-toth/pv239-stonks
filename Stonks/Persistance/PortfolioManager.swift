@@ -14,7 +14,7 @@ class PortfolioManager {
     
     private var viewContext = PersistenceController.shared.container.viewContext
     
-    func addAsset(name: String, symbol: String, coinGeckoId: String, amount: Float, imageUrl: String?, latestPrice: Float?) {
+    func addAsset(name: String, symbol: String, coinGeckoId: String, amount: Double, imageUrl: String?, latestPrice: Double?) {
         let newAsset = PortfolioAsset(context: viewContext)
         newAsset.id = UUID()
         newAsset.name = name
@@ -39,12 +39,12 @@ class PortfolioManager {
         save()
     }
     
-    func updateAssetPrice(asset: PortfolioAsset, price: Float) {
+    func updateAssetPrice(asset: PortfolioAsset, price: Double) {
         asset.latestPrice = price
         save()
     }
     
-    func updateAssetAmount(asset: PortfolioAsset, value: Float) {
+    func updateAssetAmount(asset: PortfolioAsset, value: Double) {
         asset.amount += value
         
         let newHistoryRecord = PortfolioAssetHistoryRecord(context: viewContext)
