@@ -19,25 +19,25 @@ struct SearchAssetRowView: View {
     var body: some View {
         HStack {
             HStack {
-                Text(asset.market_cap_rank.formatted() + ".")
-                    .font(.title2)
-                    .lineLimit(1)
-                    .fixedSize(horizontal: true, vertical: false)
-            }
-            
-            
-            AsyncImage(
-                url: URL(string:asset.image),
-                content: { image in
-                    image.resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: 40, maxHeight: 40)
-            },
-                placeholder: {
-                    ProgressView()
+                HStack {
+                    AdaptiveText(value: "#" + asset.market_cap_rank.formatted(), fontSizeThresholds: [2: 16, 3: 14, 4: 12, 5: 10])
+                        .lineLimit(1)
+                        .fixedSize(horizontal: true, vertical: false)
+                }
+                .frame(width: 25, alignment: .leading) // Adjust the width to your desired value
+                
+                AsyncImage(
+                    url: URL(string:asset.image),
+                    content: { image in
+                        image.resizable()
+                        .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 40, maxHeight: 40)
-
-            })
+                },
+                    placeholder: {
+                        ProgressView()
+                            .frame(maxWidth: 40, maxHeight: 40)
+                })
+            }
             
             VStack (alignment: HorizontalAlignment.leading) {
                 Text(asset.name)
@@ -55,7 +55,7 @@ struct SearchAssetRowView: View {
             
             HStack {
                 Text(asset.current_price.formatted(.currency(code: "USD")))
-                    .font(.title2)
+                    .font(.title3)
            
             }
         }
