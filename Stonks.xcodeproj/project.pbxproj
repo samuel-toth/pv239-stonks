@@ -28,6 +28,7 @@
 		394B322629CB37F600DAD4B8 /* CoinGeckoAssetHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394B322529CB37F600DAD4B8 /* CoinGeckoAssetHistory.swift */; };
 		39D736FE29E95DA200881D70 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D736FD29E95DA200881D70 /* DateExtension.swift */; };
 		39D7370029E964D900881D70 /* PortfolioAssetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D736FF29E964D900881D70 /* PortfolioAssetRowView.swift */; };
+		7556DB2D2A02DD9E00CD3EA2 /* AdaptiveText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7556DB2C2A02DD9E00CD3EA2 /* AdaptiveText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		394B322529CB37F600DAD4B8 /* CoinGeckoAssetHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinGeckoAssetHistory.swift; sourceTree = "<group>"; };
 		39D736FD29E95DA200881D70 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		39D736FF29E964D900881D70 /* PortfolioAssetRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioAssetRowView.swift; sourceTree = "<group>"; };
+		7556DB2C2A02DD9E00CD3EA2 /* AdaptiveText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 		3914880429BB4D400069C6B5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7556DB2B2A02DD7100CD3EA2 /* CustomViews */,
 				3914880729BB4DB70069C6B5 /* Home */,
 				3914880629BB4DB00069C6B5 /* Search */,
 				3914880529BB4DAA0069C6B5 /* Portfolio */,
@@ -180,6 +183,14 @@
 				39D736FD29E95DA200881D70 /* DateExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7556DB2B2A02DD7100CD3EA2 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				7556DB2C2A02DD9E00CD3EA2 /* AdaptiveText.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +268,7 @@
 				3931429929C363F200F467F8 /* SearchAssetRowView.swift in Sources */,
 				3914881129BB4DF70069C6B5 /* SearchView.swift in Sources */,
 				391487FB29BB4D1E0069C6B5 /* Persistence.swift in Sources */,
+				7556DB2D2A02DD9E00CD3EA2 /* AdaptiveText.swift in Sources */,
 				3914880D29BB4DDE0069C6B5 /* PortfolioAddView.swift in Sources */,
 				3914880B29BB4DD40069C6B5 /* PortfolioView.swift in Sources */,
 				3905689D29C35DE500064384 /* CoinGeckoManager.swift in Sources */,

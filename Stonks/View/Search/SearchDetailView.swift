@@ -88,72 +88,86 @@ struct SearchDetailView: View {
                         .foregroundColor(asset.price_change_percentage_24h! < 0 ? Color.red : Color.green)
                 }
                 
-                HStack {
+                VStack(alignment: .leading) {
                     Text("Market statistics")
                         .font(.title2)
                         .padding(.horizontal, 30)
                         .padding(.vertical, 15)
                         .fontWeight(.bold)
-                    Spacer()
+
+                    VStack(alignment: .leading, spacing: 15) {
+                        HStack {
+                            Image(systemName: "globe.europe.africa")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(maxWidth: 24, maxHeight: 24)
+                                .frame(width: 40)
+                            Text("Market capital rank")
+                                .frame(width: 150, alignment: .leading)
+                            Spacer()
+                            AdaptiveText(value: "\(asset.market_cap_rank)")
+
+                        }
+                        HStack {
+                            Image(systemName: "banknote")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(maxWidth: 24, maxHeight: 24)
+                                .frame(width: 40)
+                            Text("Market capital")
+                                .frame(width: 150, alignment: .leading)
+                            Spacer()
+                            AdaptiveText(value: asset.market_cap.formatted(.currency(code: "EUR")))
+                        }
+                        HStack {
+                            Image(systemName: "arrow.2.squarepath")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(maxWidth: 24, maxHeight: 24)
+                                .frame(width: 40)
+                            Text("Circulating supply")
+                                .frame(width: 150, alignment: .leading)
+                            Spacer()
+                            AdaptiveText(value: "\(asset.current_price)")
+                        }
+                        HStack {
+                            Image(systemName: "star")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(maxWidth: 24, maxHeight: 24)
+                                .frame(width: 40)
+                            Text("Max supply")
+                                .frame(width: 150, alignment: .leading)
+                            Spacer()
+                            AdaptiveText(value: "\(asset.max_supply ?? 0)")
+                            
+                        }
+                        HStack {
+                            Image(systemName: "arrow.up.forward")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(maxWidth: 24, maxHeight: 24)
+                                .frame(width: 40)
+                            Text("All time high")
+                                .frame(width: 150, alignment: .leading)
+                            Spacer()
+                            AdaptiveText(value: (asset.ath ?? 0).formatted(.currency(code: "EUR")))
+                        }
+                        HStack {
+                            Image(systemName: "arrow.down.backward")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(maxWidth: 24, maxHeight: 24)
+                                .frame(width: 40)
+                            Text("All time low")
+                                .frame(width: 150, alignment: .leading)
+                            Spacer()
+                            AdaptiveText(value: (asset.atl ?? 0).formatted(.currency(code: "EUR")))
+                        }
+                    }
+                    .padding(.horizontal, 30)
                 }
-                
-                HStack {
-                    Image(systemName: "globe.europe.africa")
-                        .font(.title)
-                    Text("Market capital rank")
-                    Spacer()
-                    Text("\(asset.market_cap_rank)")
-                        .font(.title2)
-                }
-                .padding(.horizontal, 40)
-                .padding(.vertical, 5)
-                HStack {
-                    Image(systemName: "banknote")
-                        .font(.title)
-                    Text("Market capital")
-                    Spacer()
-                    Text(asset.market_cap.formatted(.currency(code: "EUR")))
-                        .font(.title2)
-                }
-                .padding(.horizontal, 40)
-                .padding(.vertical, 5)
-                HStack {
-                    Image(systemName: "arrow.2.squarepath")
-                        .font(.title)
-                    Text("Circulating supply")
-                    Spacer()
-                    Text("\(asset.current_price, specifier: "%.f")")                        .font(.title2)
-                }
-                .padding(.horizontal, 40)
-                .padding(.vertical, 5)
-                HStack {
-                    Image(systemName: "star")
-                        .font(.title2)
-                    Text("Max supply")
-                    Spacer()
-                    Text("\(asset.max_supply ?? 0, specifier: "%.f")")                        .font(.title2)
-                }
-                .padding(.horizontal, 40)
-                .padding(.vertical, 5)
-                HStack {
-                    Image(systemName: "arrow.up.forward")
-                        .font(.title)
-                    Text("All time high")
-                    Spacer()
-                    Text((asset.ath ?? 0).formatted(.currency(code: "EUR")))            .font(.title2)
-                }
-                .padding(.horizontal, 40)
-                .padding(.vertical, 5)
-                HStack {
-                    Image(systemName: "arrow.down.backward")
-                        .font(.title)
-                    Text("All time low")
-                    Spacer()
-                    Text((asset.atl ?? 0).formatted(.currency(code: "EUR")))
-                        .font(.title2)
-                }
-                .padding(.horizontal, 40)
-                .padding(.vertical, 5)
+
             }
             
         }
