@@ -21,7 +21,6 @@ struct SearchAssetRowView: View {
             HStack {
                 Text(asset.market_cap_rank.formatted() + ".")
                     .font(.title2)
-                    .foregroundColor(.accentColor)
                     .lineLimit(1)
                     .fixedSize(horizontal: true, vertical: false)
             }

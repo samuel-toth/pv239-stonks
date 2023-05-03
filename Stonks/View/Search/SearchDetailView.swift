@@ -128,7 +128,7 @@ struct SearchDetailView: View {
                             Text("Circulating supply")
                                 .frame(width: 150, alignment: .leading)
                             Spacer()
-                            AdaptiveText(value: "\(asset.current_price)")
+                            AdaptiveText(value: "\(asset.current_price.formatted())")
                         }
                         HStack {
                             Image(systemName: "star")
@@ -139,7 +139,7 @@ struct SearchDetailView: View {
                             Text("Max supply")
                                 .frame(width: 150, alignment: .leading)
                             Spacer()
-                            AdaptiveText(value: "\(asset.max_supply ?? 0)")
+                            AdaptiveText(value: "\((asset.max_supply ?? 0).formatted())")
                             
                         }
                         HStack {
