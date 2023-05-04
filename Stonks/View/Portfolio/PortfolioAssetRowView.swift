@@ -56,6 +56,22 @@ struct PortfolioAssetRowView: View {
 
             }
         }
+        .contextMenu {
+            Button {
+                PortfolioManager.shared.toggleFavourite(asset: asset)
+            } label: {
+                Label(asset.isFavourite ? "Remove favourite" : "Mark as favourite", systemImage: asset.isFavourite ? "heart.slash" : "heart")
+            }
+            Divider()
+            Button(role: .destructive) {
+                withAnimation {
+                    PortfolioManager.shared.deleteAsset(asset: asset)
+                }
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+        }
+        
     }
 }
 
@@ -63,6 +79,8 @@ struct PortfolioAssetRowView_Previews: PreviewProvider {
     static var previews: some View {
         let asset = PortfolioManager.shared.createTestData()
 
-        PortfolioAssetRowView(asset: asset)
+        List(0 ..< 1) { item in
+            PortfolioAssetRowView(asset: asset)
+        }
     }
 }

@@ -39,7 +39,7 @@ class CoinGeckoManager {
         .resume()
     }
 
-    static func loadCoinGeckoAssetPrices(ids: [String], currency: String?, completion:@escaping (CoinGeckoAssetPrice) -> ()) {
+    static func loadCoinGeckoAssetPrices(ids: [String], currency: String?, completion:@escaping ([CoinGeckoAssetPrice]) -> ()) {
                 
         let ids_string: String = ids.joined(separator: ",")
         
@@ -47,24 +47,21 @@ class CoinGeckoManager {
         URLSession.shared.dataTask(with: url) { (data, _, _) in
             do {
                 
-                let json = try JSONSerialization.jsonObject(with: data!)
+                let json = try JSONSerialization.jsonObject(with: data!) as? [String: [String: Double]]
                 
-                print(json)
+                var prices: [CoinGeckoAssetPrice] = []
                 
-                if let object = json as? [Any] {
-                    for item in object as! [Dictionary<String, String>] {
-                        print(item["eur"])
-                    }
+                for (key,value) in json! {
+                    prices.append(CoinGeckoAssetPrice(id: key, price: value.values.first!))
                 }
-                
-                
-              
+                              
+                DispatchQueue.main.async {
+                    completion(prices)
+                }
             } catch {
                 print("Error during data decoding: \(error)")
             }
         }
         .resume()
     }
-    
-
 }

@@ -18,7 +18,7 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
+            VStack {
                 Group {
                     HStack {
                         Spacer()
@@ -43,15 +43,6 @@ struct HomeView: View {
                     }
                     .padding(.horizontal, 30)
                 }
-                Divider()
-                
-                HStack {
-                    Text("Favourites")
-                        .font(.title2)
-                    Spacer()
-                }
-                .padding(.horizontal, 30)
-                .padding(.top, 10)
                 
                 if (favouriteAssets.isEmpty) {
                     Text("You did not marked any asset as favourite.")
@@ -59,20 +50,21 @@ struct HomeView: View {
                         .font(.subheadline)
                         .foregroundColor(.gray)
                 } else {
-                    ForEach(favouriteAssets) { asset in
-                        NavigationLink(value: asset) {
-                            PortfolioAssetRowView(asset: asset)
+ 
+                            
+                        List(favouriteAssets) { asset in
+                            NavigationLink(value: asset) {
+                                PortfolioAssetRowView(asset: asset)
+                            }
+                            //.overlay(RoundedRectangle(cornerRadius: 10)
+                              //  .stroke(Color(UIColor.separator), lineWidth: 1))
                         }
-                        .padding(20)
-
-                        .overlay(RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color(UIColor.separator), lineWidth: 1))
-                        .padding(.horizontal, 20)
-
-                    }
+                    
                    
                     
                 }
+                
+                Spacer()
             }
             .navigationDestination(for: PortfolioAsset.self, destination: { asset in
                 PortfolioDetailView(asset: asset)

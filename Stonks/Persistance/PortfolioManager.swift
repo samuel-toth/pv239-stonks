@@ -53,9 +53,13 @@ class PortfolioManager {
         let assets = getAssets()
         let ids = assets.map { $0.coinGeckoId! }
         
-        CoinGeckoManager.loadCoinGeckoAssetPrices(ids: ids, currency: "eur") { (prices) in
-        
-            self.save()
+        CoinGeckoManager.loadCoinGeckoAssetPrices(ids: ids, currency: "eur") { latestPrices in
+            for asset in assets {
+                let latestPrice = latestPrices.first(where: { $0.id == asset.coinGeckoId! })?.price
+                if latestPrice != nil {
+                    self.updateAssetPrice(asset: asset, price: latestPrice!)
+                }
+            }
         }
     }
     
