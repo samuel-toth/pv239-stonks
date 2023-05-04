@@ -46,6 +46,9 @@ struct PortfolioView: View {
                 PortfolioAddView()
             }
             .navigationTitle("Portfolio")
+            .onAppear() {
+                PortfolioManager.shared.updateAllAssetsPricesFromApi()
+            }
         }
     }
     

@@ -11,7 +11,11 @@ struct URLProvider {
         return "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=1000&page=1&sparkline=false"
     }
     
-    static func coinGeckoAssetHistory(id: String, days: Int, currency: String = "eur") -> String {
+    static func coinGeckoAssetHistoryUrl(id: String, days: Int, currency: String = "eur") -> String {
         return "https://api.coingecko.com/api/v3/coins/\(id)/market_chart?vs_currency=\(currency)&days=\(days)"
+    }
+    
+    static func coinGeckoAssetsPriceUrl(ids: String, currency: String = "eur") -> String {
+        return "https://api.coingecko.com/api/v3/simple/price?ids=\(ids)&vs_currencies=\(currency)"
     }
 }

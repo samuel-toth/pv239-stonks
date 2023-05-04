@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3905689D29C35DE500064384 /* CoinGeckoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905689C29C35DE500064384 /* CoinGeckoManager.swift */; };
 		3905689F29C35F3700064384 /* CoinGeckoAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905689E29C35F3700064384 /* CoinGeckoAsset.swift */; };
+		390833FC2A03E1F60035DC39 /* CoinGeckoAssetPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390833FB2A03E1F60035DC39 /* CoinGeckoAssetPrice.swift */; };
 		391487F229BB4D1E0069C6B5 /* StonksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391487F129BB4D1E0069C6B5 /* StonksApp.swift */; };
 		391487F429BB4D1E0069C6B5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391487F329BB4D1E0069C6B5 /* ContentView.swift */; };
 		391487F629BB4D1E0069C6B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 391487F529BB4D1E0069C6B5 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		3905689C29C35DE500064384 /* CoinGeckoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinGeckoManager.swift; sourceTree = "<group>"; };
 		3905689E29C35F3700064384 /* CoinGeckoAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinGeckoAsset.swift; sourceTree = "<group>"; };
+		390833FB2A03E1F60035DC39 /* CoinGeckoAssetPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinGeckoAssetPrice.swift; sourceTree = "<group>"; };
 		391487EE29BB4D1E0069C6B5 /* Stonks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stonks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		391487F129BB4D1E0069C6B5 /* StonksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StonksApp.swift; sourceTree = "<group>"; };
 		391487F329BB4D1E0069C6B5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			children = (
 				3905689E29C35F3700064384 /* CoinGeckoAsset.swift */,
 				394B322529CB37F600DAD4B8 /* CoinGeckoAssetHistory.swift */,
+				390833FB2A03E1F60035DC39 /* CoinGeckoAssetPrice.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				3931429929C363F200F467F8 /* SearchAssetRowView.swift in Sources */,
 				3914881129BB4DF70069C6B5 /* SearchView.swift in Sources */,
 				391487FB29BB4D1E0069C6B5 /* Persistence.swift in Sources */,
+				390833FC2A03E1F60035DC39 /* CoinGeckoAssetPrice.swift in Sources */,
 				7556DB2D2A02DD9E00CD3EA2 /* AdaptiveText.swift in Sources */,
 				3914880D29BB4DDE0069C6B5 /* PortfolioAddView.swift in Sources */,
 				3914880B29BB4DD40069C6B5 /* PortfolioView.swift in Sources */,

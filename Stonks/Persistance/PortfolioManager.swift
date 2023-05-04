@@ -48,6 +48,16 @@ class PortfolioManager {
         asset.name = name
         save()
     }
+
+    func updateAllAssetsPricesFromApi() {
+        let assets = getAssets()
+        let ids = assets.map { $0.coinGeckoId! }
+        
+        CoinGeckoManager.loadCoinGeckoAssetPrices(ids: ids, currency: "eur") { (prices) in
+        
+            self.save()
+        }
+    }
     
     func updateAssetAmount(asset: PortfolioAsset, value: Double) {
         asset.amount += value
@@ -86,6 +96,19 @@ class PortfolioManager {
         do {
             let result = try viewContext.fetch(request)
             return result.first
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+
+    func getAssets() -> [PortfolioAsset] {
+        let request: NSFetchRequest<PortfolioAsset> = PortfolioAsset.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \PortfolioAsset.name, ascending: true)]
+
+        do {
+            let result = try viewContext.fetch(request)
+            return result
         } catch {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")

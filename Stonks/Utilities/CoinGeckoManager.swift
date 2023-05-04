@@ -25,13 +25,40 @@ class CoinGeckoManager {
     }
     
     static func loadCoinGeckoAssetHistory(id: String, days: Int, currency: String?, completion:@escaping (CoinGeckoAssetHistory) -> ()) {
-        guard let url = URL(string: URLProvider.coinGeckoAssetHistory(id: id, days: days)) else { return }
+        guard let url = URL(string: URLProvider.coinGeckoAssetHistoryUrl(id: id, days: days)) else { return }
         URLSession.shared.dataTask(with: url) { (data, _, _) in
             do {
                 let history = try JSONDecoder().decode(CoinGeckoAssetHistory.self, from: data!)
                 DispatchQueue.main.async {
                     completion(history)
                 }
+            } catch {
+                print("Error during data decoding: \(error)")
+            }
+        }
+        .resume()
+    }
+
+    static func loadCoinGeckoAssetPrices(ids: [String], currency: String?, completion:@escaping (CoinGeckoAssetPrice) -> ()) {
+                
+        let ids_string: String = ids.joined(separator: ",")
+        
+        guard let url = URL(string: URLProvider.coinGeckoAssetsPriceUrl(ids: ids_string)) else { return }
+        URLSession.shared.dataTask(with: url) { (data, _, _) in
+            do {
+                
+                let json = try JSONSerialization.jsonObject(with: data!)
+                
+                print(json)
+                
+                if let object = json as? [Any] {
+                    for item in object as! [Dictionary<String, String>] {
+                        print(item["eur"])
+                    }
+                }
+                
+                
+              
             } catch {
                 print("Error during data decoding: \(error)")
             }
