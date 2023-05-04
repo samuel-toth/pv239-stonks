@@ -69,6 +69,15 @@ class PortfolioManager {
         newHistoryRecord.asset = asset
         save()
     }
+
+    func getAllAssetsWorthPrice() -> Double {
+        let assets = getAssets()
+        var total = 0.0
+        for asset in assets {
+            total += asset.amount * asset.latestPrice
+        }
+        return total
+    }
     
     func getAssetHistoryRecords(id: UUID) -> [PortfolioAssetHistoryRecord] {
         
@@ -77,6 +86,17 @@ class PortfolioManager {
 
         do {
             let result = try viewContext.fetch(request)
+            return result
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+
+    func getAssetsCount() -> Int {
+        let request: NSFetchRequest<PortfolioAsset> = PortfolioAsset.fetchRequest()
+        do {
+            let result = try viewContext.count(for: request)
             return result
         } catch {
             let nsError = error as NSError
@@ -136,6 +156,7 @@ class PortfolioManager {
         newAsset.name = "Test Counter"
         newAsset.amount = 0
         newAsset.symbol = "BTC"
+        newAsset.isFavourite = true
         newAsset.imageUrl = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
 
 

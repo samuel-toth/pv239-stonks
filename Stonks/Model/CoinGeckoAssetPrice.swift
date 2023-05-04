@@ -8,5 +8,6 @@
 import Foundation
 
 struct CoinGeckoAssetPrice: Codable, Hashable {
-    let prices: String
+    var id: String
+    var price: Double
 }
