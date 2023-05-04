@@ -16,10 +16,14 @@ struct PortfolioDetailView: View {
     @ObservedObject var asset: PortfolioAsset
     
     @State private var valueToAdd: Double = 1
+    @State private var newName: String = ""
     @State private var showIncreaseAlert = false
     @State private var showDecreaseAlert = false
     @State private var isHistoryExpanded: Bool = false
     @State private var showHistorySheet = false
+    @State private var showDeleteAlert = false
+    @State private var showRenameAlert = false
+
 
     
     private var historyRecords: [PortfolioAssetHistoryRecord]
@@ -112,20 +116,6 @@ struct PortfolioDetailView: View {
                 }
             }
             .padding([.bottom], 15)
-            
-//            HStack {
-//                TextField("Change amount", value: $valueToAdd, format: .number)
-//                    .multilineTextAlignment(.center)
-//                    .font(.title)
-//                    .fontWeight(.bold)
-//                    .padding()
-//                    .overlay {
-//                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-//                            .stroke(Color(UIColor.systemGray5), lineWidth: 2)
-//                            .padding(.vertical, 5)
-//                    }
-//            }
-//            .padding(.horizontal, 30)
             Divider()
             DisclosureGroup("History", isExpanded: $isHistoryExpanded.animation()) {
                 VStack {
@@ -147,6 +137,31 @@ struct PortfolioDetailView: View {
                 .padding(.top, 10)
             }
             .padding([.trailing,.leading], 20)
+            .alert("Rename asset", isPresented: $showRenameAlert) {
+                TextField("New name", text: $newName)
+                Button("Confirm", action: {
+                    PortfolioManager.shared.updateAssetName(asset: asset, name: newName)
+                })
+                Button("Cancel", role: .cancel, action: {})
+            } message: {
+                Text("Please enter new name for asset.")
+            }
+        }
+        .alert(isPresented: $showDeleteAlert) {
+            Alert(
+                title: Text("Are you sure?"),
+                message: Text("This action will delete \(asset.name ?? "")."),
+                primaryButton: .default(
+                    Text("Cancel")
+                ),
+                secondaryButton: .destructive(
+                    Text("Delete"),
+                    action: {
+                        viewContext.delete(asset)
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                )
+            )
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -154,7 +169,30 @@ struct PortfolioDetailView: View {
                     .font(.system(size: 25))
                     .fontWeight(Font.Weight.semibold)
             }
-            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    PortfolioManager.shared.toggleFavourite(asset: asset)
+                }) {
+                    Image(systemName: asset.isFavourite ? "heart.fill" : "heart")
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Menu {
+                    Button(action: {
+                        showRenameAlert.toggle()
+                    }) {
+                        Label("Rename asset", systemImage: "pencil")
+                    }
+                    Button(role: .destructive, action: {
+                        showDeleteAlert.toggle()
+                    }) {
+                        Label("Delete", systemImage: "trash")
+                    }
+                }
+            label: {
+                Label("More", systemImage: "ellipsis.circle")
+            }
+            }
         }
     }
 }
@@ -162,6 +200,8 @@ struct PortfolioDetailView: View {
 struct PortfolioDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let asset = PortfolioManager.shared.createTestData()
-        PortfolioDetailView(asset: asset)
+        NavigationView {
+            PortfolioDetailView(asset: asset)
+        }
     }
 }

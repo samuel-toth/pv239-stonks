@@ -44,6 +44,11 @@ class PortfolioManager {
         save()
     }
     
+    func updateAssetName(asset: PortfolioAsset, name: String) {
+        asset.name = name
+        save()
+    }
+    
     func updateAssetAmount(asset: PortfolioAsset, value: Double) {
         asset.amount += value
         
@@ -85,6 +90,12 @@ class PortfolioManager {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
+    }
+    
+    func toggleFavourite(asset: PortfolioAsset) {
+        asset.isFavourite.toggle()
+        
+        save()
     }
     
     private func save() {
