@@ -107,12 +107,12 @@ struct PortfolioDetailView: View {
                 .padding([.trailing], 40)
                 .alert("Decrease amount", isPresented: $showDecreaseAlert) {
                     TextField("Decrease amount", value: $valueToAdd, format: .number)
-                    Button("Substract", action: {
+                    Button("Subtract", action: {
                         PortfolioManager.shared.updateAssetAmount(asset: asset, value: -valueToAdd)
                     })
                     Button("Cancel", role: .cancel, action: {})
                 } message: {
-                    Text("Please enter value to substract.")
+                    Text("Please enter value to subtract.")
                 }
             }
             .padding([.bottom], 15)
