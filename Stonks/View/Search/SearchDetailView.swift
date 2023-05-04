@@ -76,7 +76,7 @@ struct SearchDetailView: View {
                 }
                 HStack {
                     Spacer()
-                    Text(asset.current_price.formatted(.currency(code: "USD")))
+                    Text(asset.current_price.formatted(.currency(code: "EUR")))
                         .font(.title)
                         .foregroundColor(.accentColor)
                         .padding(.horizontal, 30)
@@ -117,7 +117,7 @@ struct SearchDetailView: View {
                             Text("Market capital")
                                 .frame(width: 150, alignment: .leading)
                             Spacer()
-                            AdaptiveText(value: asset.market_cap.formatted(.currency(code: "USD")))
+                            AdaptiveText(value: asset.market_cap.formatted(.currency(code: "EUR")))
                         }
                         HStack {
                             Image(systemName: "arrow.2.squarepath")
@@ -151,7 +151,7 @@ struct SearchDetailView: View {
                             Text("All time high")
                                 .frame(width: 150, alignment: .leading)
                             Spacer()
-                            AdaptiveText(value: (asset.ath ?? 0).formatted(.currency(code: "USD")))
+                            AdaptiveText(value: (asset.ath ?? 0).formatted(.currency(code: "EUR")))
                         }
                         HStack {
                             Image(systemName: "arrow.down.backward")
@@ -162,7 +162,7 @@ struct SearchDetailView: View {
                             Text("All time low")
                                 .frame(width: 150, alignment: .leading)
                             Spacer()
-                            AdaptiveText(value: (asset.atl ?? 0).formatted(.currency(code: "USD")))
+                            AdaptiveText(value: (asset.atl ?? 0).formatted(.currency(code: "EUR")))
                         }
                     }
                     .padding(.horizontal, 30)
