@@ -15,6 +15,9 @@ struct StonksApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .onAppear() {
+                    PortfolioManager.shared.updateAllAssetsPricesFromApi()
+                }
         }
     }
 }

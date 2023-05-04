@@ -14,6 +14,7 @@ struct PortfolioView: View {
 
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \PortfolioAsset.name, ascending: true)])
     private var assets: FetchedResults<PortfolioAsset>
+        
     
     var body: some View {
         NavigationStack {
@@ -46,7 +47,7 @@ struct PortfolioView: View {
                 PortfolioAddView()
             }
             .navigationTitle("Portfolio")
-            .onAppear() {
+            .refreshable {
                 PortfolioManager.shared.updateAllAssetsPricesFromApi()
             }
         }

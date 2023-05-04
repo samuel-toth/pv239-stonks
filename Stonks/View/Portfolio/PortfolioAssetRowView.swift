@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PortfolioAssetRowView: View {
     
-    @State private var asset: PortfolioAsset
+    @ObservedObject private var asset: PortfolioAsset
     
     
     init(asset: PortfolioAsset) {

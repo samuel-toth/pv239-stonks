@@ -68,7 +68,7 @@ struct PortfolioDetailView: View {
             
             HStack {
                 Spacer()
-                Text(asset.amount.formatted())
+                Text(Double(asset.amount * asset.latestPrice).formatted(.currency(code: "EUR")))
                     .font(.system(size:40))
                     .fontWeight(.semibold)
                     .foregroundColor(.accentColor)
