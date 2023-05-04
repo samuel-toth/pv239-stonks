@@ -37,7 +37,7 @@ struct PortfolioAssetRowView: View {
                     .font(.body)
                     .fontWeight(.semibold)
                     .lineLimit(2)
-                Text(asset.symbol ?? "")
+                Text(asset.coinGeckoId ?? "")
                     .font(.footnote)
                     .lineLimit(1)
                     .textCase(.uppercase)
@@ -46,13 +46,32 @@ struct PortfolioAssetRowView: View {
             
             Spacer()
             
-            HStack {
-                Text("\(asset.amount, specifier: "%.2f")")
+            VStack(alignment: .trailing) {
+                Text(Double(asset.amount * asset.latestPrice).formatted(.currency(code: "EUR")))
                     .font(.title2)
                     .foregroundColor(.accentColor)
-           
+                Text("\(asset.amount, specifier: "%.2f \(asset.symbol?.uppercased() ?? "")")")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+
             }
         }
+        .contextMenu {
+            Button {
+                PortfolioManager.shared.toggleFavourite(asset: asset)
+            } label: {
+                Label(asset.isFavourite ? "Remove favourite" : "Mark as favourite", systemImage: asset.isFavourite ? "heart.slash" : "heart")
+            }
+            Divider()
+            Button(role: .destructive) {
+                withAnimation {
+                    PortfolioManager.shared.deleteAsset(asset: asset)
+                }
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+        }
+        
     }
 }
 
@@ -60,6 +79,8 @@ struct PortfolioAssetRowView_Previews: PreviewProvider {
     static var previews: some View {
         let asset = PortfolioManager.shared.createTestData()
 
-        PortfolioAssetRowView(asset: asset)
+        List(0 ..< 1) { item in
+            PortfolioAssetRowView(asset: asset)
+        }
     }
 }
