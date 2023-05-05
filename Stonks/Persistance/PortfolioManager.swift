@@ -66,12 +66,13 @@ class PortfolioManager {
     
     func updateAssetAmount(asset: PortfolioAsset, value: Double) {
         asset.amount += value
-        
+                
         let newHistoryRecord = PortfolioAssetHistoryRecord(context: viewContext)
         newHistoryRecord.id = UUID()
         newHistoryRecord.createdAt = Date()
         newHistoryRecord.value = value
         newHistoryRecord.asset = asset
+        
         save()
     }
 

@@ -11,26 +11,22 @@ struct PortfolioAssetRowView: View {
     
     @ObservedObject private var asset: PortfolioAsset
     
-    
     init(asset: PortfolioAsset) {
         self.asset = asset
     }
     
     var body: some View {
         HStack {
-            
             AsyncImage(
                 url: URL(string: asset.imageUrl ?? ""),
                 content: { image in
                     image.resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: 40, maxHeight: 40)
-            },
-                placeholder: {
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 40, maxHeight: 40)
+                }, placeholder: {
                     ProgressView()
                         .frame(maxWidth: 40, maxHeight: 40)
-
-            })
+                })
             
             VStack (alignment: HorizontalAlignment.leading) {
                 Text(asset.name ?? "")
@@ -47,13 +43,12 @@ struct PortfolioAssetRowView: View {
             Spacer()
             
             VStack(alignment: .trailing) {
-                Text(Double(asset.amount * asset.latestPrice).formatted(.currency(code: "EUR")))
+                Text(Double(asset.amount * asset.latestPrice).formatted(.currency(code: UserDefaults.standard.string(forKey: "currency") ?? "eur")))
                     .font(.title2)
                     .foregroundColor(.accentColor)
                 Text("\(asset.amount, specifier: "%.2f \(asset.symbol?.uppercased() ?? "")")")
                     .font(.subheadline)
                     .foregroundColor(.gray)
-
             }
         }
         .contextMenu {
@@ -71,14 +66,13 @@ struct PortfolioAssetRowView: View {
                 Label("Delete", systemImage: "trash")
             }
         }
-        
     }
 }
 
 struct PortfolioAssetRowView_Previews: PreviewProvider {
     static var previews: some View {
         let asset = PortfolioManager.shared.createTestData()
-
+        
         List(0 ..< 1) { item in
             PortfolioAssetRowView(asset: asset)
         }

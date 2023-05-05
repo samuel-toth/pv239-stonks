@@ -9,12 +9,12 @@ import SwiftUI
 
 struct PortfolioView: View {
     
-    @State private var isSheetPresented: Bool = false
     @Environment(\.managedObjectContext) private var viewContext
-
+    
+    @State private var isSheetPresented: Bool = false
+    
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \PortfolioAsset.name, ascending: true)])
     private var assets: FetchedResults<PortfolioAsset>
-        
     
     var body: some View {
         NavigationStack {
@@ -26,18 +26,15 @@ struct PortfolioView: View {
                 }
                 .onDelete(perform: deleteAsset)
                 .listRowBackground(Color(UIColor.secondarySystemGroupedBackground).opacity(0.8))
-                
             }
             .navigationDestination(for: PortfolioAsset.self, destination: { asset in
                 PortfolioDetailView(asset: asset)
                     .environment(\.managedObjectContext, viewContext)
             })
-
             .toolbar {
                 ToolbarItem() {
                     Button(action: {
                         isSheetPresented.toggle()
-
                     }) {
                         Label("Add", systemImage: "plus")
                     }

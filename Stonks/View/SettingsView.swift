@@ -7,14 +7,39 @@
 
 import SwiftUI
 
+enum Currency: String, CaseIterable, Identifiable, Equatable {
+    case eur, usd, czk
+    var id: Self { self }
+}
+
 struct SettingsView: View {
+    
+    @State private var selectedCurrency: Currency = (Currency(rawValue: UserDefaults.standard.string(forKey: "currency") ?? "eur") ?? .eur)
+
+    
     var body: some View {
-        Text("Settings view")
+        NavigationStack {
+            List {
+                Picker("Select currency", selection: $selectedCurrency) {
+                    ForEach(Currency.allCases) { currency in
+                        Text(currency.rawValue.uppercased())
+                    }
+                }
+            }
+            .onChange(of: selectedCurrency) { _ in
+                print(selectedCurrency)
+                UserDefaults.standard.set(selectedCurrency.rawValue, forKey: "currency")
+            }
+            .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
+        }
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        NavigationView {
+            SettingsView()
+        }
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct StonksApp: App {
+    
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {

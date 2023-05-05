@@ -11,7 +11,6 @@ struct SearchAssetRowView: View {
     
     @State private var asset: CoinGeckoAsset
     
-    
     init(asset: CoinGeckoAsset) {
         self.asset = asset
     }
@@ -19,18 +18,16 @@ struct SearchAssetRowView: View {
     var body: some View {
         HStack {
             HStack {
-                
                 AsyncImage(
                     url: URL(string:asset.image),
                     content: { image in
                         image.resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 40, maxHeight: 40)
-                },
-                    placeholder: {
+                            .aspectRatio(contentMode: .fit)
+                            .frame(maxWidth: 40, maxHeight: 40)
+                    }, placeholder: {
                         ProgressView()
                             .frame(maxWidth: 40, maxHeight: 40)
-                })
+                    })
             }
             
             VStack (alignment: HorizontalAlignment.leading) {
@@ -50,7 +47,6 @@ struct SearchAssetRowView: View {
             HStack {
                 Text(asset.current_price.formatted(.currency(code: "EUR")))
                     .font(.title3)
-           
             }
         }
     }

@@ -23,8 +23,6 @@ struct PortfolioDetailView: View {
     @State private var showHistorySheet = false
     @State private var showDeleteAlert = false
     @State private var showRenameAlert = false
-
-
     
     private var historyRecords: [PortfolioAssetHistoryRecord]
     
@@ -102,7 +100,7 @@ struct PortfolioDetailView: View {
                     Image(systemName: "minus.circle")
                         .font(.system(size: 80))
                         .foregroundColor(Color("lightRed"))
-
+                    
                 }
                 .padding([.trailing], 40)
                 .alert("Decrease amount", isPresented: $showDecreaseAlert) {
@@ -116,7 +114,9 @@ struct PortfolioDetailView: View {
                 }
             }
             .padding([.bottom], 15)
+            
             Divider()
+            
             DisclosureGroup("History", isExpanded: $isHistoryExpanded.animation()) {
                 VStack {
                     if historyRecords.count == 0 {
@@ -127,10 +127,7 @@ struct PortfolioDetailView: View {
                             Text(record.createdAt?.dateToFormattedDatetime() ?? "" )
                             Spacer()
                             Text(record.value > 0 ? "+\(record.value, specifier: "%.2f")" : "\(record.value, specifier: "%.2f")")
-                            
                                 .foregroundColor(record.value > 0 ? .green : .red)
-                                
-                            
                         }
                     }
                 }
@@ -188,10 +185,9 @@ struct PortfolioDetailView: View {
                     }) {
                         Label("Delete", systemImage: "trash")
                     }
+                } label: {
+                    Label("More", systemImage: "ellipsis.circle")
                 }
-            label: {
-                Label("More", systemImage: "ellipsis.circle")
-            }
             }
         }
     }
