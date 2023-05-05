@@ -11,7 +11,7 @@ struct HomeView: View {
     
     @State private var isSheetPresented: Bool = false
     @Environment(\.managedObjectContext) private var viewContext
-
+    @State private var showingExporter = false
 
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \PortfolioAsset.name, ascending: true)], predicate: NSPredicate(format: "isFavourite == YES"))
     private var favouriteAssets: FetchedResults<PortfolioAsset>
@@ -80,16 +80,15 @@ struct HomeView: View {
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     Menu {
+//                        Button(action: {
+//                            // TODO: Import
+//                        }) {
+//                            Label("Import", systemImage: "tray.and.arrow.down")
+//                        }
                         Button(action: {
-                            // TODO: Import
+                            showingExporter.toggle()
                         }) {
-                            Label("Import", systemImage: "tray.and.arrow.down")
-                        }
-                        Button(action: {
-                            // TODO: Export
-
-                        }) {
-                            Label("Export", systemImage: "tray.and.arrow.up")
+                            Label("Stonks export", systemImage: "tray.and.arrow.up")
                         }
                     }
                     label: {
@@ -100,8 +99,28 @@ struct HomeView: View {
             .sheet(isPresented: $isSheetPresented) {
                 SettingsView()
             }
+            .fileExporter(
+                isPresented: $showingExporter,
+                document: PortfolioManager.shared.exportData(),
+                contentType: .commaSeparatedText,
+                defaultFilename: "Export \(getCurrentDateTime().string(from: Date.now))"
+            ) {
+                result in
+                switch result {
+                case .success(let url):
+                    print("Saved to \(url)")
+                case .failure(let error):
+                    print("Export error: \(error)")
+                }
+            }
             .navigationTitle("Home")
         }
+    }
+    
+    private func getCurrentDateTime() -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-YYYY HH-mm-ss"
+        return formatter
     }
 }
 

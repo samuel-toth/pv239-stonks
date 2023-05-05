@@ -30,6 +30,9 @@
 		39D736FE29E95DA200881D70 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D736FD29E95DA200881D70 /* DateExtension.swift */; };
 		39D7370029E964D900881D70 /* PortfolioAssetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D736FF29E964D900881D70 /* PortfolioAssetRowView.swift */; };
 		7556DB2D2A02DD9E00CD3EA2 /* AdaptiveText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7556DB2C2A02DD9E00CD3EA2 /* AdaptiveText.swift */; };
+		7556DB302A041F2D00CD3EA2 /* Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7556DB2F2A041F2D00CD3EA2 /* Export.swift */; };
+		7556DB362A045D2C00CD3EA2 /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 7556DB352A045D2C00CD3EA2 /* CodableCSV */; };
+		7556DB3A2A045F4100CD3EA2 /* ExportImportFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7556DB392A045F4100CD3EA2 /* ExportImportFile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +60,8 @@
 		39D736FD29E95DA200881D70 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		39D736FF29E964D900881D70 /* PortfolioAssetRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioAssetRowView.swift; sourceTree = "<group>"; };
 		7556DB2C2A02DD9E00CD3EA2 /* AdaptiveText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveText.swift; sourceTree = "<group>"; };
+		7556DB2F2A041F2D00CD3EA2 /* Export.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Export.swift; sourceTree = "<group>"; };
+		7556DB392A045F4100CD3EA2 /* ExportImportFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportImportFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7556DB362A045D2C00CD3EA2 /* CodableCSV in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +81,8 @@
 			children = (
 				3905689C29C35DE500064384 /* CoinGeckoManager.swift */,
 				3931429A29C3682100F467F8 /* URLProvider.swift */,
+				7556DB2F2A041F2D00CD3EA2 /* Export.swift */,
+				7556DB392A045F4100CD3EA2 /* ExportImportFile.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -212,6 +220,9 @@
 			dependencies = (
 			);
 			name = Stonks;
+			packageProductDependencies = (
+				7556DB352A045D2C00CD3EA2 /* CodableCSV */,
+			);
 			productName = Stonks;
 			productReference = 391487EE29BB4D1E0069C6B5 /* Stonks.app */;
 			productType = "com.apple.product-type.application";
@@ -240,6 +251,9 @@
 				Base,
 			);
 			mainGroup = 391487E529BB4D1E0069C6B5;
+			packageReferences = (
+				7556DB342A045D2C00CD3EA2 /* XCRemoteSwiftPackageReference "CodableCSV" */,
+			);
 			productRefGroup = 391487EF29BB4D1E0069C6B5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -269,6 +283,7 @@
 				39D7370029E964D900881D70 /* PortfolioAssetRowView.swift in Sources */,
 				3914880F29BB4DEA0069C6B5 /* PortfolioDetailView.swift in Sources */,
 				3931429929C363F200F467F8 /* SearchAssetRowView.swift in Sources */,
+				7556DB302A041F2D00CD3EA2 /* Export.swift in Sources */,
 				3914881129BB4DF70069C6B5 /* SearchView.swift in Sources */,
 				391487FB29BB4D1E0069C6B5 /* Persistence.swift in Sources */,
 				390833FC2A03E1F60035DC39 /* CoinGeckoAssetPrice.swift in Sources */,
@@ -283,6 +298,7 @@
 				391487F229BB4D1E0069C6B5 /* StonksApp.swift in Sources */,
 				3914881329BB4E000069C6B5 /* SearchDetailView.swift in Sources */,
 				39D736FE29E95DA200881D70 /* DateExtension.swift in Sources */,
+				7556DB3A2A045F4100CD3EA2 /* ExportImportFile.swift in Sources */,
 				3914881929BB58EF0069C6B5 /* PortfolioManager.swift in Sources */,
 				3914881529BB56650069C6B5 /* SettingsView.swift in Sources */,
 				394B322629CB37F600DAD4B8 /* CoinGeckoAssetHistory.swift in Sources */,
@@ -487,6 +503,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7556DB342A045D2C00CD3EA2 /* XCRemoteSwiftPackageReference "CodableCSV" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dehesa/CodableCSV.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7556DB352A045D2C00CD3EA2 /* CodableCSV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7556DB342A045D2C00CD3EA2 /* XCRemoteSwiftPackageReference "CodableCSV" */;
+			productName = CodableCSV;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		391487FC29BB4D1E0069C6B5 /* Stonks.xcdatamodeld */ = {

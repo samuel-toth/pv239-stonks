@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import CodableCSV
 
 class PortfolioManager {
     
@@ -136,6 +137,42 @@ class PortfolioManager {
         } catch {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
+    func getAllPortfolioAssetsHistoryRecords() -> [PortfolioAssetHistoryRecord] {
+        let request: NSFetchRequest<PortfolioAssetHistoryRecord> = PortfolioAssetHistoryRecord.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \PortfolioAssetHistoryRecord.createdAt, ascending: true)]
+        do {
+            let result = try viewContext.fetch(request)
+            return result
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
+    func exportData() -> ExportImportFile {
+        // TODO: this needs refactoring, extract to export class
+        let allAssetHistoryRecords = getAllPortfolioAssetsHistoryRecords()
+//        let propertyNames = Mirror(reflecting: PortfolioAssetHistoryRecord()).children.compactMap { $0.label }
+        var myRows = [
+            ["asset", "change", "transaction date"]
+        ]
+        do {
+            for item in allAssetHistoryRecords {
+                // TODO: some nil remained in my db, wipe needed
+                let assetName = item.asset?.name
+                if assetName == nil {
+                    continue
+                } else {
+                    myRows.append([assetName!, String(item.value), item.createdAt!.dateToFormattedDatetime()])
+                }
+            }
+            let string = try CSVWriter.encode(rows: myRows, into: String.self)
+            return ExportImportFile(initialContent: string)
+        } catch {
+            fatalError("Unexpected error encoding CSV: \(error)")
         }
     }
     
