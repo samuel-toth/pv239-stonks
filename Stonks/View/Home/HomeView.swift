@@ -9,10 +9,11 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State private var isSheetPresented: Bool = false
     @Environment(\.managedObjectContext) private var viewContext
+    
+    @State private var isSheetPresented: Bool = false
     @State private var showingExporter = false
-
+    
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \PortfolioAsset.name, ascending: true)], predicate: NSPredicate(format: "isFavourite == YES"))
     private var favouriteAssets: FetchedResults<PortfolioAsset>
     
@@ -29,7 +30,7 @@ struct HomeView: View {
                     
                     HStack {
                         Spacer()
-                        Text(PortfolioManager.shared.getAllAssetsWorthPrice().formatted(.currency(code: "EUR")))
+                        Text(PortfolioManager.shared.getAllAssetsWorthPrice().formatted(.currency(code: UserDefaults.standard.string(forKey: "currency") ?? "eur")))
                             .font(.system(size: 50))
                             .foregroundColor(Color("lightGreen"))
                     }
@@ -50,18 +51,12 @@ struct HomeView: View {
                         .font(.subheadline)
                         .foregroundColor(.gray)
                 } else {
- 
-                            
-                        List(favouriteAssets) { asset in
-                            NavigationLink(value: asset) {
-                                PortfolioAssetRowView(asset: asset)
-                            }
-                            //.overlay(RoundedRectangle(cornerRadius: 10)
-                              //  .stroke(Color(UIColor.separator), lineWidth: 1))
+                    
+                    List(favouriteAssets) { asset in
+                        NavigationLink(value: asset) {
+                            PortfolioAssetRowView(asset: asset)
                         }
-                    
-                   
-                    
+                    }
                 }
                 
                 Spacer()
@@ -91,9 +86,9 @@ struct HomeView: View {
                             Label("Stonks export", systemImage: "tray.and.arrow.up")
                         }
                     }
-                    label: {
-                        Label("add", systemImage: "ellipsis")
-                    }
+                label: {
+                    Label("add", systemImage: "ellipsis")
+                }
                 }
             }
             .sheet(isPresented: $isSheetPresented) {
@@ -104,8 +99,7 @@ struct HomeView: View {
                 document: PortfolioManager.shared.exportData(),
                 contentType: .commaSeparatedText,
                 defaultFilename: "Export \(getCurrentDateTime().string(from: Date.now))"
-            ) {
-                result in
+            ) { result in
                 switch result {
                 case .success(let url):
                     print("Saved to \(url)")

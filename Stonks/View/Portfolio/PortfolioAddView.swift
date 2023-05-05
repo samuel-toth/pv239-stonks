@@ -10,13 +10,13 @@ import SwiftUI
 struct PortfolioAddView: View {
     
     @Environment(\.dismiss) private var dismiss
-
+    
     @State private var name: String = ""
     @State private var amount: Double = 0
     @State private var coinGeckoId: String?
     
     @State var assets: [CoinGeckoAsset] = []
-
+    
     @State private var coinNames: [String] = []
     @State private var selectedCoinName: String = ""
     
@@ -34,16 +34,14 @@ struct PortfolioAddView: View {
             Form {
                 Section {
                     TextField("Asset name", text: $name)
-                    .onChange(of: name) { newValue in
-                        name = String(newValue.prefix(10))
-                    }
-                                        
+                        .onChange(of: name) { newValue in
+                            name = String(newValue.prefix(10))
+                        }
                 } header: {
                     Text("Asset details")
                 }
                 
                 Section {
-                    
                     Picker("Available Coins", selection: $selectedCoinName) {
                         ForEach(coinNames, id: \.self) { coin in
                             Text(coin).tag(coin)
@@ -53,7 +51,6 @@ struct PortfolioAddView: View {
                         selectedCoin = assets.first(where: { $0.name == selectedCoinName
                         })
                     }
-                    
                 } header: {
                     Text("Pick cryptocurrency")
                 } footer: {
@@ -110,7 +107,7 @@ struct PortfolioAddView: View {
         if isValid {
             withAnimation {
                 PortfolioManager.shared.addAsset(name: name, symbol: selectedCoin!.symbol, coinGeckoId: selectedCoin!.id, amount: amount, imageUrl: selectedCoin!.image, latestPrice: selectedCoin!.current_price)
-        
+                
                 dismiss()
             }
         }

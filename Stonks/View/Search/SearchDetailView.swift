@@ -11,9 +11,7 @@ import Charts
 struct SearchDetailView: View {
     
     @State var asset: CoinGeckoAsset
-    
     @State var assetHistory: CoinGeckoAssetHistory?
-
     @State var yScaleDomain: ClosedRange<Double> = 0...1
     
     var body: some View {
@@ -67,7 +65,6 @@ struct SearchDetailView: View {
             }
             .padding(.all, 30)
             
-            
             VStack {
                 HStack {
                     Spacer()
@@ -106,7 +103,6 @@ struct SearchDetailView: View {
                                 .frame(width: 150, alignment: .leading)
                             Spacer()
                             AdaptiveText(value: "\(asset.market_cap_rank)")
-
                         }
                         HStack {
                             Image(systemName: "banknote")
@@ -167,9 +163,7 @@ struct SearchDetailView: View {
                     }
                     .padding(.horizontal, 30)
                 }
-
             }
-            
         }
         .onAppear {
             fetchChartData(days: 30)

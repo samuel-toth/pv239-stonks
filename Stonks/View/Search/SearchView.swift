@@ -26,9 +26,6 @@ struct SearchView: View {
                 SearchDetailView(asset: asset)
             })
             .searchable(text: $searchText)
-            .onSubmit {
-                // filter here
-            }
             .onChange(of: searchText) { value in
                 if value.count >= 1 {
                     filterAssets()

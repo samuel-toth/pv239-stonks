@@ -20,9 +20,9 @@ struct ContentView: View {
                 }
             PortfolioView()
                 .environment(\.managedObjectContext, viewContext)
-                    .tabItem {
-                        Label("Portfolio", systemImage: "bitcoinsign")
-                    }
+                .tabItem {
+                    Label("Portfolio", systemImage: "bitcoinsign")
+                }
             SearchView()
                 .environment(\.managedObjectContext, viewContext)
                 .tabItem {
