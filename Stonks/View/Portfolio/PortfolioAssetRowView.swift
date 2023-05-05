@@ -60,7 +60,7 @@ struct PortfolioAssetRowView: View {
             Button {
                 PortfolioManager.shared.toggleFavourite(asset: asset)
             } label: {
-                Label(asset.isFavourite ? "Remove favourite" : "Mark as favourite", systemImage: asset.isFavourite ? "heart.slash" : "heart")
+                Label(asset.isFavourite ? "Remove favorite" : "Mark as favorite", systemImage: asset.isFavourite ? "heart.slash" : "heart")
             }
             Divider()
             Button(role: .destructive) {

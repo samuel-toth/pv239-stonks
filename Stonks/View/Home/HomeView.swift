@@ -45,10 +45,12 @@ struct HomeView: View {
                 }
                 
                 if (favouriteAssets.isEmpty) {
-                    Text("You did not marked any asset as favourite.")
+                    Spacer()
+                    Text("No assets were marked as favorite")
                         .padding(10)
                         .font(.subheadline)
                         .foregroundColor(.gray)
+                    Spacer()
                 } else {
  
                             
@@ -88,8 +90,12 @@ struct HomeView: View {
                         Button(action: {
                             showingExporter.toggle()
                         }) {
-                            Label("Stonks export", systemImage: "tray.and.arrow.up")
+                            Label("Export as CSV", systemImage: "tray.and.arrow.up")
                         }
+//                        Button(action: {
+//                        }) {
+//                            Label("Export as PDF", systemImage: "tray.and.arrow.up")
+//                        }
                     }
                     label: {
                         Label("add", systemImage: "ellipsis")
