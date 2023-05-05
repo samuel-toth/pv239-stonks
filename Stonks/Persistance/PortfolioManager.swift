@@ -155,7 +155,6 @@ class PortfolioManager {
     func exportData() -> ExportImportFile {
         // TODO: this needs refactoring, extract to export class
         let allAssetHistoryRecords = getAllPortfolioAssetsHistoryRecords()
-//        let propertyNames = Mirror(reflecting: PortfolioAssetHistoryRecord()).children.compactMap { $0.label }
         var myRows = [
             ["asset", "change", "transaction date"]
         ]
