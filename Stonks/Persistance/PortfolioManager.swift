@@ -160,18 +160,15 @@ class PortfolioManager {
         ]
         do {
             for item in allAssetHistoryRecords {
-                // TODO: some nil remained in my db, wipe needed
-                let assetName = item.asset?.name
-                if assetName == nil {
-                    continue
-                } else {
-                    myRows.append([assetName!, String(item.value), item.createdAt!.dateToFormattedDatetime()])
-                }
+                let assetSymbol = item.asset?.symbol
+                let assetValue = String(item.value)
+                let assetDateTime = item.createdAt!.dateToFormattedDatetime()
+                myRows.append([assetSymbol!, assetValue, assetDateTime])
             }
             let string = try CSVWriter.encode(rows: myRows, into: String.self)
             return ExportImportFile(initialContent: string)
         } catch {
-            fatalError("Unexpected error encoding CSV: \(error)")
+            fatalError("Unexpected error occured during encoding CSV: \(error)")
         }
     }
     
