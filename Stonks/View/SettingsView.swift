@@ -30,9 +30,9 @@ struct SettingsView: View {
                 print(selectedCurrency)
                 UserDefaults.standard.set(selectedCurrency.rawValue, forKey: "currency")
             }
+            .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .navigationTitle("Settings")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
