@@ -14,15 +14,13 @@ struct PortfolioAddView: View {
     @State private var name: String = ""
     @State private var amount: Double = 0
     @State private var coinGeckoId: String?
-    
     @State var assets: [CoinGeckoAsset] = []
-    
     @State private var coinNames: [String] = []
     @State private var selectedCoinName: String = ""
-    
     @State private var selectedCoin: CoinGeckoAsset?
-    
     @State private var footerString: String = ""
+    @AppStorage("currency") private var currency = "eur"
+
     
     
     private var isValid: Bool {
@@ -56,7 +54,7 @@ struct PortfolioAddView: View {
                 } footer: {
                     HStack {
                         Spacer()
-                        Text(selectedCoin != nil ? "1 \(selectedCoin!.symbol.uppercased()) = \(selectedCoin!.current_price.formatted(.currency(code: "eur")))" : "")
+                        Text(selectedCoin != nil ? "1 \(selectedCoin!.symbol.uppercased()) = \(selectedCoin!.current_price.formatted(.currency(code: currency)))" : "")
                     }
                 }
                 
@@ -70,7 +68,7 @@ struct PortfolioAddView: View {
                         .onChange(of: amount) { _ in
                             if (selectedCoin != nil) {
                                 let sum = selectedCoin!.current_price * amount
-                                footerString = "\(amount) \(selectedCoin!.symbol.uppercased()) =  \(sum.formatted(.currency(code: "eur")))"
+                                footerString = "\(amount) \(selectedCoin!.symbol.uppercased()) =  \(sum.formatted(.currency(code: currency)))"
                             }
                         }
                 } header: {
@@ -114,11 +112,11 @@ struct PortfolioAddView: View {
     }
     
     func fetchAssets() {
-        CoinGeckoManager.loadCoinGeckoAssets { assets in
+        CoinGeckoManager.loadCoinGeckoAssets(currency: currency) { assets in
             self.assets = assets
             coinNames = assets.map {
                 $0.name
-            }.sorted()
+            }
         }
     }
 }

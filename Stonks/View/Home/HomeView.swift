@@ -13,6 +13,8 @@ struct HomeView: View {
     
     @State private var isSheetPresented: Bool = false
     @State private var showingExporter = false
+    @AppStorage("currency") private var currency = "eur"
+
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \PortfolioAsset.name, ascending: true)], predicate: NSPredicate(format: "isFavourite == YES"))
     private var favouriteAssets: FetchedResults<PortfolioAsset>
@@ -30,7 +32,7 @@ struct HomeView: View {
                     
                     HStack {
                         Spacer()
-                        Text(PortfolioManager.shared.getAllAssetsWorthPrice().formatted(.currency(code: UserDefaults.standard.string(forKey: "currency") ?? "eur")))
+                        Text(PortfolioManager.shared.getAllAssetsWorthPrice().formatted(.currency(code: currency)))
                             .font(.system(size: 50))
                             .foregroundColor(Color("lightGreen"))
                     }

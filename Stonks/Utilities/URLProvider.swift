@@ -7,8 +7,8 @@
 
 import Foundation
 struct URLProvider {
-    static func coinGeckoListUrl() -> String {
-        return "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=1000&page=1&sparkline=false"
+    static func coinGeckoListUrl(currency: String = "eur") -> String {
+        return "https://api.coingecko.com/api/v3/coins/markets?vs_currency=\(currency)&order=market_cap_desc&per_page=1000&page=1&sparkline=false"
     }
     
     static func coinGeckoAssetHistoryUrl(id: String, days: Int, currency: String = "eur") -> String {

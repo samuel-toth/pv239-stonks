@@ -9,8 +9,8 @@ import Foundation
 
 class CoinGeckoManager {
     
-    static func loadCoinGeckoAssets(completion:@escaping ([CoinGeckoAsset]) -> ()) {
-        guard let url = URL(string: URLProvider.coinGeckoListUrl()) else { return }
+    static func loadCoinGeckoAssets(currency: String, completion:@escaping ([CoinGeckoAsset]) -> ()) {
+        guard let url = URL(string: URLProvider.coinGeckoListUrl(currency: currency)) else { return }
         URLSession.shared.dataTask(with: url) { (data, _, _) in
             do {
                 let assets = try JSONDecoder().decode([CoinGeckoAsset].self, from: data!)
@@ -24,8 +24,8 @@ class CoinGeckoManager {
         .resume()
     }
     
-    static func loadCoinGeckoAssetHistory(id: String, days: Int, currency: String?, completion:@escaping (CoinGeckoAssetHistory) -> ()) {
-        guard let url = URL(string: URLProvider.coinGeckoAssetHistoryUrl(id: id, days: days)) else { return }
+    static func loadCoinGeckoAssetHistory(id: String, days: Int, currency: String, completion:@escaping (CoinGeckoAssetHistory) -> ()) {
+        guard let url = URL(string: URLProvider.coinGeckoAssetHistoryUrl(id: id, days: days, currency: currency)) else { return }
         URLSession.shared.dataTask(with: url) { (data, _, _) in
             do {
                 let history = try JSONDecoder().decode(CoinGeckoAssetHistory.self, from: data!)
@@ -39,11 +39,11 @@ class CoinGeckoManager {
         .resume()
     }
 
-    static func loadCoinGeckoAssetPrices(ids: [String], currency: String?, completion:@escaping ([CoinGeckoAssetPrice]) -> ()) {
+    static func loadCoinGeckoAssetPrices(ids: [String], currency: String, completion:@escaping ([CoinGeckoAssetPrice]) -> ()) {
                 
         let ids_string: String = ids.joined(separator: ",")
         
-        guard let url = URL(string: URLProvider.coinGeckoAssetsPriceUrl(ids: ids_string)) else { return }
+        guard let url = URL(string: URLProvider.coinGeckoAssetsPriceUrl(ids: ids_string, currency: currency)) else { return }
         URLSession.shared.dataTask(with: url) { (data, _, _) in
             do {
                 

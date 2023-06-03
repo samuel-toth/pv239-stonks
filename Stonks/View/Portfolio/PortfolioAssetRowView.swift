@@ -10,6 +10,7 @@ import SwiftUI
 struct PortfolioAssetRowView: View {
     
     @ObservedObject private var asset: PortfolioAsset
+    @AppStorage("currency") private var currency = "eur"
     
     init(asset: PortfolioAsset) {
         self.asset = asset
@@ -43,7 +44,7 @@ struct PortfolioAssetRowView: View {
             Spacer()
             
             VStack(alignment: .trailing) {
-                Text(Double(asset.amount * asset.latestPrice).formatted(.currency(code: UserDefaults.standard.string(forKey: "currency") ?? "eur")))
+                Text(Double(asset.amount * asset.latestPrice).formatted(.currency(code: currency)))
                     .font(.title2)
                     .foregroundColor(.accentColor)
                 Text("\(asset.amount, specifier: "%.2f \(asset.symbol?.uppercased() ?? "")")")

@@ -12,6 +12,7 @@ struct PortfolioView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @State private var isSheetPresented: Bool = false
+    @AppStorage("currency") private var currency = "eur"
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \PortfolioAsset.name, ascending: true)])
     private var assets: FetchedResults<PortfolioAsset>
@@ -45,7 +46,7 @@ struct PortfolioView: View {
             }
             .navigationTitle("Portfolio")
             .refreshable {
-                PortfolioManager.shared.updateAllAssetsPricesFromApi()
+                PortfolioManager.shared.updateAllAssetsPricesFromApi(currency: currency)
             }
         }
     }

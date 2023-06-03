@@ -50,11 +50,11 @@ class PortfolioManager {
         save()
     }
 
-    func updateAllAssetsPricesFromApi() {
+    func updateAllAssetsPricesFromApi(currency: String) {
         let assets = getAssets()
         let ids = assets.map { $0.coinGeckoId! }
         
-        CoinGeckoManager.loadCoinGeckoAssetPrices(ids: ids, currency: "eur") { latestPrices in
+        CoinGeckoManager.loadCoinGeckoAssetPrices(ids: ids, currency: currency) { latestPrices in
             for asset in assets {
                 let latestPrice = latestPrices.first(where: { $0.id == asset.coinGeckoId! })?.price
                 if latestPrice != nil {

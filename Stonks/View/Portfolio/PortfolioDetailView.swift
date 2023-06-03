@@ -23,6 +23,8 @@ struct PortfolioDetailView: View {
     @State private var showHistorySheet = false
     @State private var showDeleteAlert = false
     @State private var showRenameAlert = false
+    @AppStorage("currency") private var currency = "eur"
+
     
     private var historyRecords: [PortfolioAssetHistoryRecord]
     
@@ -66,7 +68,7 @@ struct PortfolioDetailView: View {
             
             HStack {
                 Spacer()
-                Text(Double(asset.amount * asset.latestPrice).formatted(.currency(code: "EUR")))
+                Text(Double(asset.amount * asset.latestPrice).formatted(.currency(code: currency)))
                     .font(.system(size:40))
                     .fontWeight(.semibold)
                     .foregroundColor(.accentColor)

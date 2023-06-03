@@ -29,6 +29,8 @@ struct SettingsView: View {
             .onChange(of: selectedCurrency) { _ in
                 print(selectedCurrency)
                 UserDefaults.standard.set(selectedCurrency.rawValue, forKey: "currency")
+                PortfolioManager.shared.updateAllAssetsPricesFromApi(currency: selectedCurrency.rawValue)
+
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)

@@ -11,13 +11,14 @@ import SwiftUI
 struct StonksApp: App {
     
     let persistenceController = PersistenceController.shared
+    @AppStorage("currency") private var currency = "eur"
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .onAppear() {
-                    PortfolioManager.shared.updateAllAssetsPricesFromApi()
+                    PortfolioManager.shared.updateAllAssetsPricesFromApi(currency: currency)
                 }
         }
     }

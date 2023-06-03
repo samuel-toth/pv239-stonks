@@ -12,6 +12,8 @@ struct SearchView: View {
     @State var searchText: String = ""
     @State var assets: [CoinGeckoAsset] = []
     @State private var filteredAssets: [CoinGeckoAsset] = []
+    @AppStorage("currency") private var currency = "eur"
+
     
     var body: some View {
         NavigationStack {
@@ -41,7 +43,7 @@ struct SearchView: View {
     }
     
     func fetchMostActiveAssets() {
-        CoinGeckoManager.loadCoinGeckoAssets { assets in
+        CoinGeckoManager.loadCoinGeckoAssets(currency: currency) { assets in
             self.assets = assets
             self.filteredAssets = assets
         }

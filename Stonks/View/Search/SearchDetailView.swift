@@ -13,6 +13,8 @@ struct SearchDetailView: View {
     @State var asset: CoinGeckoAsset
     @State var assetHistory: CoinGeckoAssetHistory?
     @State var yScaleDomain: ClosedRange<Double> = 0...1
+    @AppStorage("currency") private var currency = "eur"
+
     
     var body: some View {
         ScrollView {
@@ -172,7 +174,7 @@ struct SearchDetailView: View {
     }
     
     private func fetchChartData(days: Int) {
-        CoinGeckoManager.loadCoinGeckoAssetHistory(id: asset.id, days: days, currency: nil) { ah in
+        CoinGeckoManager.loadCoinGeckoAssetHistory(id: asset.id, days: days, currency: currency) { ah in
             self.assetHistory = ah
             self.yScaleDomain = ah.chartData().min(by: { $0.price < $1.price })!.price...ah.chartData().max(by: { $0.price < $1.price })!.price
         }
