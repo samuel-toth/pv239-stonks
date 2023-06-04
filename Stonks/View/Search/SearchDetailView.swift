@@ -75,7 +75,7 @@ struct SearchDetailView: View {
                 }
                 HStack {
                     Spacer()
-                    Text(asset.current_price.formatted(.currency(code: "EUR")))
+                    Text(asset.current_price.formatted(.currency(code: currency)))
                         .font(.title)
                         .foregroundColor(.accentColor)
                         .padding(.horizontal, 30)
@@ -115,7 +115,7 @@ struct SearchDetailView: View {
                             Text("Market capital")
                                 .frame(width: 150, alignment: .leading)
                             Spacer()
-                            AdaptiveText(value: asset.market_cap.formatted(.currency(code: "EUR")))
+                            AdaptiveText(value: asset.market_cap.formatted(.currency(code: currency)))
                         }
                         HStack {
                             Image(systemName: "arrow.2.squarepath")
@@ -149,7 +149,7 @@ struct SearchDetailView: View {
                             Text("All time high")
                                 .frame(width: 150, alignment: .leading)
                             Spacer()
-                            AdaptiveText(value: (asset.ath ?? 0).formatted(.currency(code: "EUR")))
+                            AdaptiveText(value: (asset.ath ?? 0).formatted(.currency(code: currency)))
                         }
                         HStack {
                             Image(systemName: "arrow.down.backward")
@@ -160,7 +160,7 @@ struct SearchDetailView: View {
                             Text("All time low")
                                 .frame(width: 150, alignment: .leading)
                             Spacer()
-                            AdaptiveText(value: (asset.atl ?? 0).formatted(.currency(code: "EUR")))
+                            AdaptiveText(value: (asset.atl ?? 0).formatted(.currency(code: currency)))
                         }
                     }
                     .padding(.horizontal, 30)

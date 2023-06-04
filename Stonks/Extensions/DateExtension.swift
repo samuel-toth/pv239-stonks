@@ -19,4 +19,12 @@ extension Date {
         dateFormatter.dateFormat = "dd.MM.YY"
         return dateFormatter.string(from: self)
     }
+
+    func dateFromFormattedDateTime(from: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm dd.MM.YY"
+        return dateFormatter.date(from: from)
+    }
+    
+    
 }

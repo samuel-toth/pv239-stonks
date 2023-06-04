@@ -20,6 +20,9 @@ struct PortfolioDetailView: View {
     @State private var showIncreaseAlert = false
     @State private var showDecreaseAlert = false
     @State private var isHistoryExpanded: Bool = false
+    @State private var isImportPresented = false
+    @State private var isImportAlertPresented = false
+    @State private var isImportInfoPresented = false
     @State private var showHistorySheet = false
     @State private var showDeleteAlert = false
     @State private var showRenameAlert = false
@@ -56,7 +59,6 @@ struct PortfolioDetailView: View {
                     .fontWeight(Font.Weight.bold)
             }
             .padding([.horizontal], 30)
-            
             HStack {
                 Spacer()
                 Text("Worth")
@@ -162,6 +164,33 @@ struct PortfolioDetailView: View {
                 )
             )
         }
+        .alert("Warning", isPresented: $isImportInfoPresented, actions: {
+            Button("Cancel", role: .cancel, action: {})
+            Button("Continue", action: {
+                isImportPresented.toggle()
+            })
+        }, message: {
+            Text("Importing an asset that is already in portfolio will result in overwritting that asset.")
+        })
+        .alert("Error occured", isPresented: $isImportAlertPresented, actions: {
+        }, message: {
+            Text("The chosen file could not be parsed. Please, check if the file is in correct format.")
+        })
+        .fileImporter(isPresented: $isImportPresented, allowedContentTypes: [.commaSeparatedText]) { result in
+            switch result {
+            case .success(let file):
+                do {
+                    let records = try CSVImporter.importHistoryRecords(url: URL(string: file.absoluteString)!)
+                    
+                    PortfolioManager.shared.writePortfolioAssetHistoryRecordsFromTuples(asset: asset, records: records)
+                } catch _ {
+                    isImportAlertPresented.toggle()
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text(asset.name!)
@@ -182,6 +211,12 @@ struct PortfolioDetailView: View {
                     }) {
                         Label("Rename asset", systemImage: "pencil")
                     }
+                    Button(action: {
+                        isImportInfoPresented.toggle()
+                    }) {
+                        Label("Import from file", systemImage: "tray.and.arrow.down")
+                    }
+                    Divider()
                     Button(role: .destructive, action: {
                         showDeleteAlert.toggle()
                     }) {

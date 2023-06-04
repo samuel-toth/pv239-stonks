@@ -153,32 +153,30 @@ class PortfolioManager {
         }
     }
     
-    func exportData() -> ExportImportFile {
-        // TODO: this needs refactoring, extract to export class
-        let allAssetHistoryRecords = getAllPortfolioAssetsHistoryRecords()
-        var myRows = [
-            ["asset", "change", "transaction date"]
-        ]
-        do {
-            for item in allAssetHistoryRecords {
-                // TODO: some nil remained in my db, wipe needed
-                let assetName = item.asset?.name
-                if assetName == nil {
-                    continue
-                } else {
-                    myRows.append([assetName!, String(item.value), item.createdAt!.dateToFormattedDatetime()])
-                }
-            }
-            let string = try CSVWriter.encode(rows: myRows, into: String.self)
-            return ExportImportFile(initialContent: string)
-        } catch {
-            fatalError("Unexpected error encoding CSV: \(error)")
+
+    // this function filters the records by asset id and writes them to the database
+    // and recalculate the asset's amount by summing the values of the records
+    func writePortfolioAssetHistoryRecordsFromTuples(asset: PortfolioAsset, records: [(UUID, String, Double, Date)]) {
+
+        let filteredRecords = records.filter { $0.1 == asset.name }
+
+
+        for record in filteredRecords {
+            let newHistoryRecord = PortfolioAssetHistoryRecord(context: viewContext)
+            newHistoryRecord.id = record.0
+            newHistoryRecord.createdAt = record.3
+            newHistoryRecord.value = record.2
+            newHistoryRecord.asset = asset
         }
+
+        let sum = filteredRecords.map { $0.2 }.reduce(0, +)
+        asset.amount = sum
+
+        save()
     }
     
     func toggleFavourite(asset: PortfolioAsset) {
         asset.isFavourite.toggle()
-        
         save()
     }
     
@@ -199,7 +197,6 @@ class PortfolioManager {
         newAsset.symbol = "BTC"
         newAsset.isFavourite = true
         newAsset.imageUrl = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
-
 
         do {
             try viewContext.save()
