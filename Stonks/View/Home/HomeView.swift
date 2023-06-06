@@ -73,27 +73,7 @@ struct HomeView: View {
                         Label("Settings", systemImage: "gear")
                     }
                 }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Menu {
-//                        Button(action: {
-//                            // TODO: Import
-//                        }) {
-//                            Label("Import", systemImage: "tray.and.arrow.down")
-//                        }
-                        Button(action: {
-                            showingExporter.toggle()
-                        }) {
-                            Label("Export as CSV", systemImage: "tray.and.arrow.up")
-                        }
-//                        Button(action: {
-//                        }) {
-//                            Label("Export as PDF", systemImage: "tray.and.arrow.up")
-//                        }
-                    }
-                label: {
-                    Label("add", systemImage: "ellipsis")
-                }
-                }
+                
             }
             .sheet(isPresented: $isSheetPresented) {
                 SettingsView()

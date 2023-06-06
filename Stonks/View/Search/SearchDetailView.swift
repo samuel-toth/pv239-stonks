@@ -97,10 +97,9 @@ struct SearchDetailView: View {
                     VStack(alignment: .leading, spacing: 15) {
                         HStack {
                             Image(systemName: "globe.europe.africa")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: 24, maxHeight: 24)
-                                .frame(width: 40)
+                                .font(.system(size: 25))
+                                .frame(width: 30)
+                                .foregroundColor(Color(UIColor.secondaryLabel))
                             Text("Market capital rank")
                                 .frame(width: 150, alignment: .leading)
                             Spacer()
@@ -108,10 +107,9 @@ struct SearchDetailView: View {
                         }
                         HStack {
                             Image(systemName: "banknote")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: 24, maxHeight: 24)
-                                .frame(width: 40)
+                                .font(.system(size: 25))
+                                .frame(width: 30)
+                                .foregroundColor(Color(UIColor.secondaryLabel))
                             Text("Market capital")
                                 .frame(width: 150, alignment: .leading)
                             Spacer()
@@ -119,10 +117,9 @@ struct SearchDetailView: View {
                         }
                         HStack {
                             Image(systemName: "arrow.2.squarepath")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: 24, maxHeight: 24)
-                                .frame(width: 40)
+                                .font(.system(size: 25))
+                                .frame(width: 30)
+                                .foregroundColor(Color(UIColor.secondaryLabel))
                             Text("Circulating supply")
                                 .frame(width: 150, alignment: .leading)
                             Spacer()
@@ -130,10 +127,9 @@ struct SearchDetailView: View {
                         }
                         HStack {
                             Image(systemName: "star")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: 24, maxHeight: 24)
-                                .frame(width: 40)
+                                .font(.system(size: 25))
+                                .frame(width: 30)
+                                .foregroundColor(Color(UIColor.secondaryLabel))
                             Text("Max supply")
                                 .frame(width: 150, alignment: .leading)
                             Spacer()
@@ -141,22 +137,20 @@ struct SearchDetailView: View {
                             
                         }
                         HStack {
-                            Image(systemName: "arrow.up.forward")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: 24, maxHeight: 24)
-                                .frame(width: 40)
+                            Image(systemName: "chart.line.uptrend.xyaxis")
+                                .font(.system(size: 25))
+                                .frame(width: 30)
+                                .foregroundColor(Color(UIColor.secondaryLabel))
                             Text("All time high")
                                 .frame(width: 150, alignment: .leading)
                             Spacer()
                             AdaptiveText(value: (asset.ath ?? 0).formatted(.currency(code: currency)))
                         }
                         HStack {
-                            Image(systemName: "arrow.down.backward")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: 24, maxHeight: 24)
-                                .frame(width: 40)
+                            Image(systemName: "chart.line.downtrend.xyaxis")
+                                .font(.system(size: 25))
+                                .frame(width: 30)
+                                .foregroundColor(Color(UIColor.secondaryLabel))
                             Text("All time low")
                                 .frame(width: 150, alignment: .leading)
                             Spacer()
