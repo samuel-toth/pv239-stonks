@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22E261" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="PortfolioAsset" representedClassName="PortfolioAsset" syncable="YES" codeGenerationType="class">
         <attribute name="amount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="coinGeckoId" optional="YES" attributeType="String"/>
+        <attribute name="hasWalletString" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="imageUrl" optional="YES" attributeType="String"/>
         <attribute name="isFavourite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="latestPrice" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="symbol" attributeType="String"/>
+        <attribute name="walletString" optional="YES" attributeType="String"/>
         <relationship name="historyRecords" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PortfolioAssetHistoryRecord" inverseName="asset" inverseEntity="PortfolioAssetHistoryRecord"/>
     </entity>
     <entity name="PortfolioAssetHistoryRecord" representedClassName="PortfolioAssetHistoryRecord" syncable="YES" codeGenerationType="class">

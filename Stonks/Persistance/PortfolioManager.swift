@@ -15,7 +15,7 @@ class PortfolioManager {
     
     private var viewContext = PersistenceController.shared.container.viewContext
     
-    func addAsset(name: String, symbol: String, coinGeckoId: String, amount: Double, imageUrl: String?, latestPrice: Double?) {
+    func addAsset(name: String, symbol: String, coinGeckoId: String, amount: Double, imageUrl: String?, latestPrice: Double?, walletString: String?) {
         let newAsset = PortfolioAsset(context: viewContext)
         newAsset.id = UUID()
         newAsset.name = name
@@ -37,6 +37,11 @@ class PortfolioManager {
             newAsset.latestPrice = latestPrice!
         }
         
+        if walletString != nil {
+            newAsset.walletString = walletString!
+            newAsset.hasWalletString = true
+        }
+        
         save()
     }
     
@@ -47,6 +52,12 @@ class PortfolioManager {
     
     func updateAssetName(asset: PortfolioAsset, name: String) {
         asset.name = name
+        save()
+    }
+    
+    func updateAssetWallet(asset: PortfolioAsset, walletString: String) {
+        asset.walletString = walletString
+        asset.hasWalletString = true
         save()
     }
 
@@ -64,12 +75,12 @@ class PortfolioManager {
         }
     }
     
-    func updateAssetAmount(asset: PortfolioAsset, value: Double) {
+    func updateAssetAmount(asset: PortfolioAsset, value: Double, date: Date?) {
         asset.amount += value
                 
         let newHistoryRecord = PortfolioAssetHistoryRecord(context: viewContext)
         newHistoryRecord.id = UUID()
-        newHistoryRecord.createdAt = Date()
+        newHistoryRecord.createdAt = date != nil ? date : Date()
         newHistoryRecord.value = value
         newHistoryRecord.asset = asset
         
@@ -162,16 +173,8 @@ class PortfolioManager {
 
 
         for record in filteredRecords {
-            let newHistoryRecord = PortfolioAssetHistoryRecord(context: viewContext)
-            newHistoryRecord.id = record.0
-            newHistoryRecord.createdAt = record.3
-            newHistoryRecord.value = record.2
-            newHistoryRecord.asset = asset
+            updateAssetAmount(asset: asset, value: record.2, date: record.3)
         }
-
-        let sum = filteredRecords.map { $0.2 }.reduce(0, +)
-        asset.amount = sum
-
         save()
     }
     

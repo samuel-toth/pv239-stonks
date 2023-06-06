@@ -77,6 +77,7 @@ struct HomeView: View {
             .sheet(isPresented: $isSheetPresented) {
                 SettingsView()
                     .presentationDetents([.medium])
+                    .presentationDragIndicator(.visible)
             }
             
             .navigationTitle("Home")

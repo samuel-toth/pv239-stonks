@@ -12,6 +12,7 @@ struct PortfolioAddView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var name: String = ""
+    @State private var walletString: String = ""
     @State private var amount: Double = 0
     @State private var coinGeckoId: String?
     @State var assets: [CoinGeckoAsset] = []
@@ -19,12 +20,14 @@ struct PortfolioAddView: View {
     @State private var selectedCoinName: String = ""
     @State private var selectedCoin: CoinGeckoAsset?
     @State private var footerString: String = ""
+    @State private var isWalletExpanded = false
+
     @AppStorage("currency") private var currency = "eur"
 
     
     
     private var isValid: Bool {
-        !name.isEmpty && selectedCoin != nil
+        !name.isEmpty && selectedCoin != nil && (walletString.isEmpty ^ (walletString.count >= 32 && walletString.count <= 64) )
     }
     
     var body: some View {
@@ -79,6 +82,10 @@ struct PortfolioAddView: View {
                         Text(footerString)
                     }
                 }
+                
+                DisclosureGroup("Wallet number", isExpanded: $isWalletExpanded) {
+                    TextField("Asset number (32-64 characters)", text: $walletString)
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -104,7 +111,7 @@ struct PortfolioAddView: View {
     func addAsset() {
         if isValid {
             withAnimation {
-                PortfolioManager.shared.addAsset(name: name, symbol: selectedCoin!.symbol, coinGeckoId: selectedCoin!.id, amount: amount, imageUrl: selectedCoin!.image, latestPrice: selectedCoin!.current_price)
+                PortfolioManager.shared.addAsset(name: name, symbol: selectedCoin!.symbol, coinGeckoId: selectedCoin!.id, amount: amount, imageUrl: selectedCoin!.image, latestPrice: selectedCoin!.current_price, walletString: !walletString.isEmpty ? walletString : nil)
                 
                 dismiss()
             }
@@ -124,5 +131,11 @@ struct PortfolioAddView: View {
 struct PortfolioAddView_Previews: PreviewProvider {
     static var previews: some View {
         PortfolioAddView()
+    }
+}
+
+extension Bool {
+    static func ^(lhs: Bool, rhs: Bool) -> Bool {
+        return lhs != rhs
     }
 }
