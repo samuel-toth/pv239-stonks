@@ -164,9 +164,6 @@ class PortfolioManager {
         }
     }
     
-
-    // this function filters the records by asset id and writes them to the database
-    // and recalculate the asset's amount by summing the values of the records
     func writePortfolioAssetHistoryRecordsFromTuples(asset: PortfolioAsset, records: [(UUID, String, Double, Date)]) {
 
         let filteredRecords = records.filter { $0.1 == asset.name }
