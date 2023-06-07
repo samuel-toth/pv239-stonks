@@ -63,7 +63,7 @@ struct PortfolioAddView: View {
                 
                 Section {
                     TextField("Initial amount", value: $amount, format: .number)
-                        .keyboardType(.numberPad)
+                        .keyboardType(.decimalPad)
                         .multilineTextAlignment(.trailing)
                         .onTapGesture {
                             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
